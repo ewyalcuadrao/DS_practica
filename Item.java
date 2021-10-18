@@ -1,13 +1,14 @@
 import java.util.*;
 import java.time.*;
-public class Item{
-  private int tam;
-  private Project father;
-  private String name;
-  private LocalDateTime init;
-  private LocalDateTime end;
-  private Duration totalTime;
-  private boolean active;
+
+public abstract class Item{
+  protected int tam;
+  protected Project father;
+  protected String name;
+  protected LocalDateTime init;
+  protected LocalDateTime end;
+  protected Duration totalTime;
+  protected boolean active;
 
   public Item(String name){
     this.tam = 0;
@@ -15,9 +16,11 @@ public class Item{
     this.name = name;
     this.init = null;
     this.end = null;
-    this.totalTime = null;
-    this.active = true;
+    this.totalTime = Duration.ZERO;
+    this.active = false;
   }
+
+  protected abstract Duration getDurationBetween(LocalDateTime ini, LocalDateTime end);
 
   public int getTam() {
     return tam;
@@ -39,9 +42,7 @@ public class Item{
     return end;
   }
 
-  public Duration getTotalTime() {
-    return totalTime;
-  }
+  public abstract Duration getTotalTime();
 
   public boolean isActive() {
     return active;
