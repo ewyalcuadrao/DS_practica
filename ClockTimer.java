@@ -4,11 +4,10 @@ import java.util.*;
 public class ClockTimer extends Observable{
   private Timer timer;
   private LocalDateTime dateTime;
-  private Observer o;
   private static ClockTimer instance= null;
   private static final int periode = 1; //seconds
 
-  private ClockTimer() {timer = new Timer();}
+  private ClockTimer() {this.start();}
 
   public static ClockTimer getInstance(){
     if(instance == null){instance = new ClockTimer();}
