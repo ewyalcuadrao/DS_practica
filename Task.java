@@ -101,7 +101,7 @@ public class Task extends Item{
       return this.totalTime;
     else
     {
-      Duration d = Duration.between( interval.get(interval.size()-1).getInitTime(), interval.get(interval.size()-1).getNowTime());
+      Duration d = Duration.between( interval.get(interval.size()-1).getInitTime(), interval.get(interval.size()-1).getEndTime());
       this.totalTime = this.totalTime.plus(d);
       this.father.setTotalTime(this.father.totalTime.plus(d));
       return this.totalTime;
