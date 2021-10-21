@@ -4,17 +4,17 @@ import java.util.*;
 public class Interval implements Observer{
   private ClockTimer clock;
   private LocalDateTime initTime;
-  private LocalDateTime nowTime;
+  int seconds=2;
   private LocalDateTime endTime;
 
   public Interval() {
     clock = ClockTimer.getInstance();
     clock.addObserver(this);
-    this.initTime = nowTime; //mirar si aqui now esta vacio
+    this.initTime = LocalDateTime.now(); //mirar si aqui now esta vacio
   }
 
   public void stopInterval() {
-    this.endTime = nowTime;
+    clock.deleteObserver(this);
   }
 
   public Duration getInterval() {
@@ -24,20 +24,16 @@ public class Interval implements Observer{
 
   @Override
   public void update(Observable o, Object arg) {
-    if(o == clock)
-      nowTime = (LocalDateTime) arg;
+    if(o == clock) {
+      //Utilizamos endtime como tiempo actual porque al salir del programa se quedara con el último tiempo
+      endTime = (LocalDateTime) arg;
+      seconds++;
+      System.out.println("Hora inicial    "+ initTime + "    Hora actual: " + endTime+ "   Segundos:"+ seconds);
+    }
   }
 
   public LocalDateTime getInitTime() {
     return initTime;
-  }
-
-  public LocalDateTime getNowTime() {
-    return nowTime;
-  }
-
-  public void setNowTime(LocalDateTime nowTime) {
-    this.nowTime = nowTime;
   }
 
   public LocalDateTime getEndTime() {
