@@ -17,7 +17,15 @@ public class Project extends Item {
     super(name);
     item = new ArrayList<Item>();
   }
-
+  public Project(String name, Project p) {
+    super(name);
+    this.father=p;
+    p.addTask(this);
+    item = new ArrayList<Item>();
+  }
+  public void addTask(Item task){
+    item.add(task);
+  }
   public void createNewTask(String name) {
     Task t = new Task(name, this);
     item.add(t);
@@ -25,9 +33,21 @@ public class Project extends Item {
   public Duration getTotalTime(){
     return this.totalTime;
   }
+
   public void createNewProject(String name) {
-    Project p = new Project(name);
-    p.setFather(this);
+    Project p = new Project(name, this);
     item.add(p);
+  }
+
+  public ArrayList<Item> getItem() {
+    return item;
+  }
+
+  public void setItem(ArrayList<Item> item) {
+    this.item = item;
+  }
+
+  public Item getSonItem(String name){
+    return null;
   }
 }
