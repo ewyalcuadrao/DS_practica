@@ -28,7 +28,20 @@ public class Main {
                     Task FM = new Task("first milestone", TT);
 
 
+                    TFL.startWorking();
+                    Thread.sleep(2000);
+                    TSL.startWorking();
+                    Thread.sleep(2000);
+                    RH.startWorking();
+                    Thread.sleep(4000);
 
+                    TFL.stopWorking();
+                    Thread.sleep(2000);
+                    TSL.stopWorking();
+                    Thread.sleep(2000);
+                    RH.stopWorking();
+                    Thread.sleep(4000);
+                    
                     Gson gson = new Gson();
                     String JSON = gson.toJson(SD);
                     Task FM3 = new Task("first milestone", TT);
