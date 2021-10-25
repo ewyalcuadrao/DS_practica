@@ -30,7 +30,7 @@ public class Main {
                     Task RH = new Task("read handout", PTR);
                     Task FM = new Task("first milestone", PTR);
 
-
+                    ClockTimer clock = ClockTimer.getInstance();
                     Printer printer = new Printer(root);
                     TFL.startWorking();
                     Thread.sleep(2000);

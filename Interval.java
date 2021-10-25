@@ -14,9 +14,9 @@ public class Interval implements Observer{
     this.duration = Duration.ZERO;
     this.clock = ClockTimer.getInstance();
     this.clock.addObserver(this);
-    this.initTime = clock.getDate();
+    this.initTime = LocalDateTime.now();
     this.updateIni(initTime);
-    this.endTime = clock.getDate();
+    this.endTime = LocalDateTime.now();
     this.updateEnd(endTime);
   }
 
@@ -55,13 +55,12 @@ public class Interval implements Observer{
 
   public void updateEnd(LocalDateTime end) {
     this.endTime = end;
-    if(father.getInit() != null)
-      this.father.updateEnd(end);
+    this.father.updateEnd(end);
   }
 
   public void updateIni(LocalDateTime ini){
     this.initTime = ini;
-    if(father.getInit() != null)
-      father.setInit(ini);
+    if(father.getInit() == null)
+      father.updateIni(ini);
   }
 }

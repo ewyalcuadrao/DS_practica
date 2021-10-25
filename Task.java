@@ -19,15 +19,17 @@ public class Task extends Item{
 
   protected void startWorking()
   {
-    if (!this.active) {
+    if (!active) {
       Interval i = new Interval(this);
-      this.active = true;
+      active = true;
+      father.setActive(true);
       interval.add(i);
     }
   }
   public void stopWorking()
   {
     active = false;
+    father.setActive(false);
     interval.get(interval.size()-1).stopInterval();
     totalTime = this.totalTime.plus(interval.get(interval.size()-1).getInterval()); // Algo anda mal aqui
     father.setTotalTime(father.getTotalTime().plus(interval.get(interval.size()-1).getInterval()));

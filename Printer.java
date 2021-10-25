@@ -24,13 +24,13 @@ public class Printer implements Visitor, Observer{
     if (t.getEnd() != null)
       endTime = t.getEnd().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
 
-    System.out.println("Task " + t.getName() + "             child of " + t.getFather().getName() + "   " +
+    System.out.println("Task " + t.getName() + "    child of " + t.getFather().getName() + "   " +
         initTime + "  " + endTime + "  " + t.getTotalTime().toSeconds());
   }
 
   @Override
   public void visitInterval(Interval i) {
-    System.out.println("Interval             child of " + i.getFather().getName() + "   " +
+    System.out.println("Interval   child of " + i.getFather().getName() + "   " +
         i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "  " +
         i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "  " +
         i.getInterval().toSeconds());

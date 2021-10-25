@@ -85,7 +85,8 @@ public abstract class Item{
   }
 
   public void updateIni(LocalDateTime ini){
-    if(father != null && father.getInit() != null)
-      father.setInit(ini);
+    this.init = ini;
+    if(father != null && father.getInit() == null)
+      father.updateIni(ini);
   }
 }
