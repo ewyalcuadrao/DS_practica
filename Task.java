@@ -11,26 +11,26 @@ public class Task extends Item{
   {
     super(name);
     this.father = father;
-    interval = new ArrayList();
+    this.interval = new ArrayList();
     i=0;
     j=0;
+    this.father.addTask(this);
   }
 
   protected void startWorking()
   {
-    Interval i = new Interval();
-    if(interval.size() == 0)
-      this.init = i.getInitTime();
-    this.active = true;
-    interval.add(i);
+    if (!this.active) {
+      Interval i = new Interval(this);
+      this.active = true;
+      interval.add(i);
+    }
   }
   public void stopWorking()
   {
-    this.active = false;
+    active = false;
     interval.get(interval.size()-1).stopInterval();
-    this.end = interval.get(interval.size()-1).getEndTime();
-    this.totalTime = this.totalTime.plus(interval.get(interval.size()-1).getInterval());
-    father.setTotalTime(father.totalTime.plus(interval.get(interval.size()-1).getInterval()));
+    totalTime = this.totalTime.plus(interval.get(interval.size()-1).getInterval()); // Algo anda mal aqui
+    father.setTotalTime(father.getTotalTime().plus(interval.get(interval.size()-1).getInterval()));
   }
   private boolean dateBetween(LocalDateTime ini, LocalDateTime end)
   {
@@ -118,6 +118,13 @@ public class Task extends Item{
       this.father.setTotalTime(this.father.totalTime.plus(d));
       return this.totalTime;
      }
+  }
+
+  @Override
+  public void acceptVisitor(Visitor v){
+    v.visitTask(this);
+    if (this.active)
+      interval.get(interval.size()-1).acceptVisitor(v);
   }
 
 }

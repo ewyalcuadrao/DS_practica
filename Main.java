@@ -1,4 +1,4 @@
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 import org.json.JSONObject;
 
 
@@ -16,18 +16,22 @@ public class Main {
 
                 try
                 {
-                    Project SD = new Project("software design");
-                    Project ST = new Project("software testing");
-                    Project DB = new Project("databases");
-                    Project TT = new Project("task transportation");
-                    Project PP = new Project("projects problems)", SD);
+
+                    Project root = new Project("root");
+
+                    Project SD = new Project("software design", root);
+                    Project ST = new Project("software testing", root);
+                    Project DB = new Project("databases", root);
+                    Task TT = new Task("transportation", root);
+                    Project PP = new Project("problems", SD);
                     Project PTR = new Project("project time tracker", SD);
-                    Task TFL = new Task("task first list", PP);
-                    Task TSL = new Task("task second list", PP);
-                    Task RH = new Task("read handout", TT);
-                    Task FM = new Task("first milestone", TT);
+                    Task TFL = new Task("first list", PP);
+                    Task TSL = new Task("second list", PP);
+                    Task RH = new Task("read handout", PTR);
+                    Task FM = new Task("first milestone", PTR);
 
 
+                    Printer printer = new Printer(root);
                     TFL.startWorking();
                     Thread.sleep(2000);
                     TSL.startWorking();
@@ -42,9 +46,8 @@ public class Main {
                     RH.stopWorking();
                     Thread.sleep(4000);
                     
-                    Gson gson = new Gson();
-                    String JSON = gson.toJson(SD);
-                    Task FM3 = new Task("first milestone", TT);
+                    //Gson gson = new Gson();
+                    //String JSON = gson.toJson(SD);
                 }catch (Exception e){
 
 

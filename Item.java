@@ -75,4 +75,17 @@ public abstract class Item{
   public void setActive(boolean active) {
     this.active = active;
   }
+
+  public abstract void acceptVisitor(Visitor v);
+
+  public void updateEnd(LocalDateTime end) {
+    this.end = end;
+    if (father != null)
+      father.updateEnd(end);
+  }
+
+  public void updateIni(LocalDateTime ini){
+    if(father != null && father.getInit() != null)
+      father.setInit(ini);
+  }
 }

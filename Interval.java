@@ -1,20 +1,23 @@
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
-import java.time.format.DateTimeFormatter.*;
+
 
 public class Interval implements Observer{
   private ClockTimer clock;
   private LocalDateTime initTime;
   private Duration duration;
   private LocalDateTime endTime;
+  private Task father;
 
-  public Interval() {
+  public Interval(Task father) {
+    this.father = father;
     this.duration = Duration.ZERO;
     this.clock = ClockTimer.getInstance();
     this.clock.addObserver(this);
-    this.initTime = LocalDateTime.now(); //mirar si aqui now esta vacio
+    this.initTime = clock.getDate();
+    this.updateIni(initTime);
+    this.endTime = clock.getDate();
+    this.updateEnd(endTime);
   }
 
   public void stopInterval() {
@@ -30,9 +33,9 @@ public class Interval implements Observer{
   public void update(Observable o, Object arg) {
     if(o == clock) {
       //Utilizamos endtime como tiempo actual porque al salir del programa se quedara con el último tiempo
-      endTime = (LocalDateTime) arg;
+      LocalDateTime dateTime = (LocalDateTime) arg;
+      this.updateEnd(endTime);
       this.duration = this.duration.plusSeconds(1);
-      System.out.println("Hora inicial    "+ initTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "    Hora actual: " + endTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "   Segundos:"+ duration.toSeconds());
     }
   }
 
@@ -42,5 +45,23 @@ public class Interval implements Observer{
 
   public LocalDateTime getEndTime() {
     return endTime;
+  }
+
+  public void acceptVisitor(Visitor v){
+    v.visitInterval(this);
+  }
+
+  public Task getFather() {return this.father;}
+
+  public void updateEnd(LocalDateTime end) {
+    this.endTime = end;
+    if(father.getInit() != null)
+      this.father.updateEnd(end);
+  }
+
+  public void updateIni(LocalDateTime ini){
+    this.initTime = ini;
+    if(father.getInit() != null)
+      father.setInit(ini);
   }
 }

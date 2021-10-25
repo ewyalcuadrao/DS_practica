@@ -53,4 +53,20 @@ public class Project extends Item {
   public Item getSonItem(String name){
     return null;
   }
+
+  @Override
+  public void acceptVisitor(Visitor v){
+    v.visitProject(this);
+    for (int i = 0; i < item.size(); i++){
+      item.get(i).acceptVisitor(v);
+    }
+  }
+
+  @Override
+  public void setInit(LocalDateTime init) {
+    this.init = init;
+    if(father!=null)
+      if(father.getInit()==null)
+        father.setInit(LocalDateTime.now());
+  }
 }
