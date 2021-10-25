@@ -8,37 +8,52 @@ interface Observer{
 }
 
 abstract Item{
-- name : String
-- initTime : DateTime
-- endTime : DateTime
-- totalTIme : DateTime
-- active : boolean
+# name : String
+# initTime : LocalDateTime
+# endTime : LocalDateTime
+# totalTIme : Duration
+# active : boolean
+# father : Project
+# {abstract} getDurationBetween(ini : LocalDateTime, end : LocalDateTime) : Duration
++ {abstract} getTotalTime() : Duration
 }
 
 
 class Project{
++ Project(name : String)
++ Project(name : String, father : Project)
+# getDurationBetween(ini : LocalDateTime, end : LocalDateTime) : Duration
++ addTask(task : Task)
 + createNewTask(name : String)
 + createNewProject(name : String)
-+ getTotalTime() : DateTime
++ getTotalTime() : Duration
 }
 
 class Task{
-+ startInterval()
-+ addSeconds(int seconds)
++ startWorking()
++ stopWorking()
+# getDurationBetween(ini : LocalDateTime, end : LocalDateTime) : Duration
++ getTotalTime() : Duration
 }
 
 class Interval{
-- initTime : DateTime
-- endTime : DateTime
-+ draw()
+- initTime : LocalDateTime
+- endTime : LocalDateTime
+- clock : ClockTimer
+- duration : Duration
++ stopInterval()
++ getInterval() : Duration
 + update(o : Observable, arg : Object)
 }
 
 class ClockTimer{
 - timer : Timer
-- dateTime : DateTime
-+ startTime()
-+ tick()
+- dateTime : LocalDateTime
+- {static} instance : ClockTimer
+- {static} periode : int
++ {static} getInstance() : ClockTimer
++ start()
++ stop()
 }
 
 Item <|--- Project
