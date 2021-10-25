@@ -1,10 +1,13 @@
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
+import java.time.format.DateTimeFormatter.*;
 
 public class Interval implements Observer{
   private ClockTimer clock;
   private LocalDateTime initTime;
-  int seconds=2;
+  Duration duration = Duration.ZERO;
   private LocalDateTime endTime;
 
   public Interval() {
@@ -27,8 +30,8 @@ public class Interval implements Observer{
     if(o == clock) {
       //Utilizamos endtime como tiempo actual porque al salir del programa se quedara con el último tiempo
       endTime = (LocalDateTime) arg;
-      seconds++;
-      System.out.println("Hora inicial    "+ initTime + "    Hora actual: " + endTime+ "   Segundos:"+ seconds);
+      this.duration = this.duration.plusSeconds(1);
+      System.out.println("Hora inicial    "+ initTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "    Hora actual: " + endTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "   Segundos:"+ duration.toSeconds());
     }
   }
 

@@ -82,6 +82,7 @@ public class Task extends Item{
   @Override
   protected Duration getDurationBetween(LocalDateTime ini, LocalDateTime end)
   {
+    /*
     int i=0;
     boolean trob = dateBetween(ini, end);
     Duration d = Duration.ZERO;
@@ -92,6 +93,15 @@ public class Task extends Item{
     else{
       return d;
     }
+     */
+    Duration duration = Duration.ZERO;
+    for (int i = 0; i < interval.size(); i++){
+      if ((interval.get(i).getInitTime().isAfter(ini) || interval.get(i).getInitTime().isEqual(ini)) &&
+          (interval.get(i).getEndTime().isBefore(end) || interval.get(i).getEndTime().isEqual(end))){
+          duration = duration.plus(interval.get(i).getInterval());
+      }
+    }
+    return duration;
   }
 
   @Override
