@@ -7,12 +7,13 @@ import java.time.format.DateTimeFormatter.*;
 public class Interval implements Observer{
   private ClockTimer clock;
   private LocalDateTime initTime;
-  Duration duration = Duration.ZERO;
+  private Duration duration;
   private LocalDateTime endTime;
 
   public Interval() {
-    clock = ClockTimer.getInstance();
-    clock.addObserver(this);
+    this.duration = Duration.ZERO;
+    this.clock = ClockTimer.getInstance();
+    this.clock.addObserver(this);
     this.initTime = LocalDateTime.now(); //mirar si aqui now esta vacio
   }
 

@@ -95,11 +95,13 @@ public class Task extends Item{
     }
      */
     Duration duration = Duration.ZERO;
+    boolean cond = false;
     for (int i = 0; i < interval.size(); i++){
-      if ((interval.get(i).getInitTime().isAfter(ini) || interval.get(i).getInitTime().isEqual(ini)) &&
-          (interval.get(i).getEndTime().isBefore(end) || interval.get(i).getEndTime().isEqual(end))){
+      cond = (interval.get(i).getInitTime().isAfter(ini) || interval.get(i).getInitTime().isEqual(ini)) &&
+          (interval.get(i).getEndTime().isBefore(end) || interval.get(i).getEndTime().isEqual(end));
+
+      if (cond)
           duration = duration.plus(interval.get(i).getInterval());
-      }
     }
     return duration;
   }

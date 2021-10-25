@@ -4,28 +4,31 @@ import java.time.*;
 public class Project extends Item {
   protected ArrayList<Item> item;
 
-  @Override
-  public Duration getDurationBetween(LocalDateTime ini, LocalDateTime end) {
-    Duration d = Duration.ZERO;
-    for (int i = 0; i < item.size(); i++) {
-      d.plus(item.get(i).getDurationBetween(ini, end));
-    }
-    return d;
-  }
-
   public Project(String name) {
     super(name);
     item = new ArrayList<Item>();
   }
-  public Project(String name, Project p) {
+
+  public Project(String name, Project father) {
     super(name);
-    this.father=p;
-    p.addTask(this);
-    item = new ArrayList<Item>();
+    this.father=father;
+    this.father.addTask(this);
+    this.item = new ArrayList<Item>();
   }
+
+  @Override
+  protected Duration getDurationBetween(LocalDateTime ini, LocalDateTime end) {
+    Duration duration = Duration.ZERO;
+    for (int i = 0; i < item.size(); i++) {
+      duration.plus(item.get(i).getDurationBetween(ini, end));
+    }
+    return duration;
+  }
+
   public void addTask(Item task){
     item.add(task);
   }
+
   public void createNewTask(String name) {
     Task t = new Task(name, this);
     item.add(t);
