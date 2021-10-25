@@ -25,8 +25,7 @@ public class Interval implements Observer{
   }
 
   public Duration getInterval() {
-    Duration d = Duration.between(this.initTime, this.endTime);
-    return d;
+    return duration;
   }
 
   @Override

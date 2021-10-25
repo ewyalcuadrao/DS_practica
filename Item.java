@@ -89,4 +89,10 @@ public abstract class Item{
     if(father != null && father.getInit() == null)
       father.updateIni(ini);
   }
+
+  public void updateTotalTime(Duration d){
+    totalTime = this.totalTime.plus(d);
+    if (father != null)
+      father.updateTotalTime(d);
+  }
 }

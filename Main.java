@@ -34,6 +34,7 @@ public class Main {
                     Printer printer = new Printer(root);
                     TFL.startWorking();
                     Thread.sleep(2000);
+                    // Algo pasa que el tiempo no se guarda bien y el periodo del reloj es de menos de 1 segundo
                     TSL.startWorking();
                     Thread.sleep(2000);
                     RH.startWorking();
