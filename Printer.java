@@ -12,6 +12,7 @@ public class Printer implements Visitor, Observer{
     this.Groot = root;
     this.clock = ClockTimer.getInstance();
     this.clock.addObserver(this);
+    System.out.printf("%-30s %-30s %-30s %-30s %s\n", "Item", "Parent", "Initial time", "End time", "Seconds");
   }
 
   @Override
@@ -24,15 +25,16 @@ public class Printer implements Visitor, Observer{
     if (t.getEndTime() != null)
       endTime = t.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
 
-    System.out.println("Task " + t.getName() + "    child of " + t.getFather().getName() + "   " +
-        initTime + "  " + endTime + "  " + t.getTotalTime().toSeconds());
+    System.out.printf("%-30s %-30s %-30s %-30s %s\n",
+        "Task " + t.getName(), "child of " + t.getFather().getName(), initTime, endTime, t.getTotalTime().toSeconds());
   }
 
   @Override
   public void visitInterval(Interval i) {
-    System.out.println("Interval   child of " + i.getFather().getName() + "   " +
-        i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "  " +
-        i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "  " +
+    System.out.printf("%-30s %-30s %-30s %-30s %s\n",
+        "Interval ", "child of " + i.getFather().getName(),
+        i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
+        i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
         i.getInterval().toSeconds());
   }
 
@@ -50,8 +52,8 @@ public class Printer implements Visitor, Observer{
       endTime = p.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
 
 
-    System.out.println("Projecte " + p.getName() + "          child of " + fatherName + "   " + initTime + "  " +
-        endTime + "  " + p.getTotalTime().toSeconds());
+    System.out.printf("%-30s %-30s %-30s %-30s %s\n",
+        "Projecte " + p.getName(), "child of " + fatherName, initTime, endTime, p.getTotalTime().toSeconds());
   }
 
   @Override

@@ -19,16 +19,16 @@ public class Main {
 
                     Project root = new Project("root");
 
-                    Project SD = new Project("software design", root);
-                    Project ST = new Project("software testing", root);
-                    Project DB = new Project("databases", root);
-                    Task TT = new Task("transportation", root);
-                    Project PP = new Project("problems", SD);
-                    Project PTR = new Project("project time tracker", SD);
-                    Task TFL = new Task("first list", PP);
-                    Task TSL = new Task("second list", PP);
-                    Task RH = new Task("read handout", PTR);
-                    Task FM = new Task("first milestone", PTR);
+                    Project SD = new Project("Software Design", root);
+                    Project ST = new Project("Software Testing", root);
+                    Project DB = new Project("Databases", root);
+                    Task TT = new Task("Transportation", root);
+                    Project PP = new Project("Problems", SD);
+                    Project PTR = new Project("Project time tracker", SD);
+                    Task TFL = new Task("First list", PP);
+                    Task TSL = new Task("Second list", PP);
+                    Task RH = new Task("Read handout", PTR);
+                    Task FM = new Task("First milestone", PTR);
 
                     ClockTimer clock = ClockTimer.getInstance();
                     Printer printer = new Printer(root);

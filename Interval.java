@@ -34,7 +34,7 @@ public class Interval implements Observer{
       //Utilizamos endtime como tiempo actual porque al salir del programa se quedara con el último tiempo
       LocalDateTime dateTime = (LocalDateTime) arg;
       this.updateEnd(dateTime);
-      this.duration = this.duration.plusSeconds(1);
+      this.duration = this.duration.plusSeconds(ClockTimer.getPeriode());
     }
   }
 

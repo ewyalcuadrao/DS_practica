@@ -31,4 +31,5 @@ public class ClockTimer extends Observable{
   }
   public LocalDateTime getDate(){return dateTime;}
 
+  public static int getPeriode() { return periode; }
 }
