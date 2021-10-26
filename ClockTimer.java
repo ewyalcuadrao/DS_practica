@@ -5,7 +5,7 @@ public class ClockTimer extends Observable{
   private Timer timer;
   private LocalDateTime dateTime;
   private static ClockTimer instance= null;
-  private static final int periode = 1; //seconds
+  private static final int periode = 2; //seconds
 
   private ClockTimer() {this.start();}
 

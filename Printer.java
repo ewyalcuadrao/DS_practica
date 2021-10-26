@@ -19,10 +19,10 @@ public class Printer implements Visitor, Observer{
     String initTime = "null";
     String endTime = "null";
 
-    if (t.getInit() != null)
-      initTime = t.getInit().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
-    if (t.getEnd() != null)
-      endTime = t.getEnd().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    if (t.getInitTime() != null)
+      initTime = t.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    if (t.getEndTime() != null)
+      endTime = t.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
 
     System.out.println("Task " + t.getName() + "    child of " + t.getFather().getName() + "   " +
         initTime + "  " + endTime + "  " + t.getTotalTime().toSeconds());
@@ -44,10 +44,10 @@ public class Printer implements Visitor, Observer{
 
     if (p.getFather() != null)
       fatherName = p.getFather().getName();
-    if (p.getInit() != null)
-      initTime = p.getInit().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
-    if (p.getEnd() != null)
-      endTime = p.getEnd().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    if (p.getInitTime() != null)
+      initTime = p.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    if (p.getEndTime() != null)
+      endTime = p.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
 
 
     System.out.println("Projecte " + p.getName() + "          child of " + fatherName + "   " + initTime + "  " +

@@ -16,6 +16,10 @@ abstract Item{
 # father : Project
 # {abstract} getDurationBetween(ini : LocalDateTime, end : LocalDateTime) : Duration
 + {abstract} getTotalTime() : Duration
++ updateEnd(end : LocalDateTime)
++ updateIni(ini : LocalDateTime)
++ updateTotalTime(d : Duration)
++ {abstract} acceptVisitor(v : Visitor)
 }
 
 
@@ -27,6 +31,7 @@ class Project{
 + createNewTask(name : String)
 + createNewProject(name : String)
 + getTotalTime() : Duration
++ acceptVisitor(v : Visitor)
 }
 
 class Task{
@@ -34,6 +39,7 @@ class Task{
 + stopWorking()
 # getDurationBetween(ini : LocalDateTime, end : LocalDateTime) : Duration
 + getTotalTime() : Duration
++ acceptVisitor(v : Visitor)
 }
 
 class Interval{
@@ -44,6 +50,9 @@ class Interval{
 + stopInterval()
 + getInterval() : Duration
 + update(o : Observable, arg : Object)
++ acceptVisitor(v : Visitor)
++ updateEnd(end : LocalDateTime)
++ updateIni(ini : LocalDateTime)
 }
 
 class ClockTimer{
@@ -56,10 +65,28 @@ class ClockTimer{
 + stop()
 }
 
+interface Visitor{
++ visitTask(t : Task);
++ visitInterval(i : Interval);
++ visitProject(p : Project);
+}
+
+class Printer{
+- clock : ClockTimer
+- root : Project
++ Printer(root : Project)
++ visitTask(t : Task)
++ visitInterval(i : Interval)
++ visitProject(p : Project)
++ update(o : Observable, arg : Object)
+}
+
 Item <|--- Project
 Item <|--- Task
 Item "*"<---*"1" Project
 Interval "*"<---*"1" Task
 Observer <|.. Interval
 Observable <|-- ClockTimer
+Observer <|.. Printer
+Visitor <|.. Printer
 @enduml

@@ -14,15 +14,15 @@ public class Json {
 
     public JSONObject generarDatos(Project p, String s){
         s= "{ 'name':'"+p.getName()+"', 'tam':'"+p.getTam()+"', 'father':'"+p.getFather()+"'," +
-                "'init':'"+p.getInit()+"', 'end':'"+p.getEnd()+"', 'totalTime':'"+p.getTotalTime()+"'}";
+                "'init':'"+p.getInitTime()+"', 'end':'"+p.getEndTime()+"', 'totalTime':'"+p.getTotalTime()+"'}";
         JSONObject json = new JSONObject();
         JSONObject user = new JSONObject();
 
         try {
             json.put("tam", p.getTam());
             json.put("father", p.getFather());
-            json.put("init", p.getInit());
-            json.put("end", p.getEnd());
+            json.put("init", p.getInitTime());
+            json.put("end", p.getEndTime());
             json.put("totalTime", p.getTotalTime());
             json.put("item", user);
         } catch (JSONException e) {
@@ -36,8 +36,8 @@ public class Json {
         try {
             s.put("tam", p.getTam());
             s.put("father", p.getFather());
-            s.put("init", p.getInit());
-            s.put("end", p.getEnd());
+            s.put("init", p.getInitTime());
+            s.put("end", p.getEndTime());
             s.put("totalTime", p.getTotalTime());
         } catch (JSONException e) {
             e.printStackTrace();

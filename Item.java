@@ -1,12 +1,11 @@
-import java.util.*;
 import java.time.*;
 
 public abstract class Item{
   protected int tam;
   protected Project father;
   protected String name;
-  protected LocalDateTime init;
-  protected LocalDateTime end;
+  protected LocalDateTime initTime;
+  protected LocalDateTime endTime;
   protected Duration totalTime;
   protected boolean active;
 
@@ -14,8 +13,8 @@ public abstract class Item{
     this.tam = 0;
     this.father = null;
     this.name = name;
-    this.init = null;
-    this.end = null;
+    this.initTime = null;
+    this.endTime = null;
     this.totalTime = Duration.ZERO;
     this.active = false;
   }
@@ -34,12 +33,10 @@ public abstract class Item{
     return name;
   }
 
-  public LocalDateTime getInit() {
-    return init;
-  }
+  public LocalDateTime getInitTime() {return initTime;}
 
-  public LocalDateTime getEnd() {
-    return end;
+  public LocalDateTime getEndTime() {
+    return endTime;
   }
 
   public abstract Duration getTotalTime();
@@ -60,33 +57,29 @@ public abstract class Item{
     this.name = name;
   }
 
-  public void setInit(LocalDateTime init) {
-    this.init = init;
-  }
+  public void setInitTime(LocalDateTime initTime) {this.initTime = initTime;}
 
-  public void setEnd(LocalDateTime end) {
-    this.end = end;
+  public void setEndTime(LocalDateTime endTime) {
+    this.endTime = endTime;
   }
 
   public void setTotalTime(Duration totalTime) {
     this.totalTime = totalTime;
   }
 
-  public void setActive(boolean active) {
-    this.active = active;
-  }
+  public void setActive(boolean active) {this.active = active;}
 
   public abstract void acceptVisitor(Visitor v);
 
   public void updateEnd(LocalDateTime end) {
-    this.end = end;
+    this.endTime = end;
     if (father != null)
       father.updateEnd(end);
   }
 
   public void updateIni(LocalDateTime ini){
-    this.init = ini;
-    if(father != null && father.getInit() == null)
+    this.initTime = ini;
+    if(father != null && father.getInitTime() == null)
       father.updateIni(ini);
   }
 

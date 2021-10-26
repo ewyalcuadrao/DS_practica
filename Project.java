@@ -33,6 +33,8 @@ public class Project extends Item {
     Task t = new Task(name, this);
     item.add(t);
   }
+
+  @Override
   public Duration getTotalTime(){
     this.totalTime = Duration.ZERO;
     for (int i = 0; i < item.size(); i++) {
@@ -67,10 +69,10 @@ public class Project extends Item {
   }
 
   @Override
-  public void setInit(LocalDateTime init) {
-    this.init = init;
+  public void setInitTime(LocalDateTime initTime) {
+    this.initTime = initTime;
     if(father!=null)
-      if(father.getInit()==null)
-        father.setInit(LocalDateTime.now());
+      if(father.getInitTime()==null)
+        father.setInitTime(LocalDateTime.now());
   }
 }

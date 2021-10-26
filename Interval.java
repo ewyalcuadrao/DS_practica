@@ -33,8 +33,8 @@ public class Interval implements Observer{
     if(o == clock) {
       //Utilizamos endtime como tiempo actual porque al salir del programa se quedara con el último tiempo
       LocalDateTime dateTime = (LocalDateTime) arg;
-      this.updateEnd(endTime);
-      this.duration = this.duration.plusSeconds(2);
+      this.updateEnd(dateTime);
+      this.duration = this.duration.plusSeconds(1);
     }
   }
 
@@ -59,7 +59,7 @@ public class Interval implements Observer{
 
   public void updateIni(LocalDateTime ini){
     this.initTime = ini;
-    if(father.getInit() == null)
-      this.father.updateIni(ini);
+    if(father.getInitTime() == null)
+      father.updateIni(ini);
   }
 }

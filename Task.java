@@ -37,10 +37,10 @@ public class Task extends Item{
     boolean cond = false;
     for (int i = 0; i < interval.size(); i++){
       cond = (interval.get(i).getInitTime().isAfter(ini) || interval.get(i).getInitTime().isEqual(ini)) &&
-              (interval.get(i).getEndTime().isBefore(end) || interval.get(i).getEndTime().isEqual(end));
+          (interval.get(i).getEndTime().isBefore(end) || interval.get(i).getEndTime().isEqual(end));
 
       if (cond)
-        duration = duration.plus(interval.get(i).getInterval());
+          duration = duration.plus(interval.get(i).getInterval());
     }
     return duration;
   }
@@ -54,7 +54,7 @@ public class Task extends Item{
     {
       Duration d = interval.get(interval.size()-1).getInterval();
       return this.totalTime.plus(d);
-    }
+     }
   }
 
   @Override
