@@ -34,6 +34,10 @@ public class Project extends Item {
     item.add(t);
   }
   public Duration getTotalTime(){
+    this.totalTime = Duration.ZERO;
+    for (int i = 0; i < item.size(); i++) {
+      this.totalTime=this.totalTime.plus(item.get(i).getTotalTime());
+    }
     return this.totalTime;
   }
 
