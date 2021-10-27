@@ -11,10 +11,10 @@ public class Interval implements Observer{
 
   public Interval(Task father) {
     this.father = father;
-    this.duration = Duration.ZERO;
+    this.duration = Duration.ZERO.plusSeconds(ClockTimer.getPeriode());
     this.clock = ClockTimer.getInstance();
     this.clock.addObserver(this);
-    this.initTime = LocalDateTime.now();
+    this.initTime = LocalDateTime.now().minusSeconds(ClockTimer.getPeriode());
     this.updateIni(initTime);
     this.endTime = LocalDateTime.now();
     this.updateEnd(endTime);
@@ -59,7 +59,8 @@ public class Interval implements Observer{
 
   public void updateIni(LocalDateTime ini){
     this.initTime = ini;
-    if(father.getInitTime() == null)
+    if(father.getInitTime() == null) {
       father.updateIni(ini);
+    }
   }
 }

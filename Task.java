@@ -20,14 +20,16 @@ public class Task extends Item{
       active = true;
       father.setActive(true);
       interval.add(i);
+      System.out.println(this.name + " starts");
     }
-  }
+   }
   public void stopWorking()
   {
     active = false;
     father.setActive(false);
     interval.get(interval.size()-1).stopInterval();
     this.updateTotalTime(interval.get(interval.size()-1).getInterval());
+    System.out.println(this.name + " stops");
   }
 
   @Override
@@ -60,8 +62,9 @@ public class Task extends Item{
   @Override
   public void acceptVisitor(Visitor v){
     v.visitTask(this);
-    if (this.active)
-      interval.get(interval.size()-1).acceptVisitor(v);
   }
 
+  public Interval getLastInterval(){
+    return interval.get(interval.size()-1);
+  }
 }

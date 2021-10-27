@@ -1,7 +1,6 @@
 import java.time.*;
 
 public abstract class Item{
-  protected int tam;
   protected Project father;
   protected String name;
   protected LocalDateTime initTime;
@@ -10,7 +9,6 @@ public abstract class Item{
   protected boolean active;
 
   public Item(String name){
-    this.tam = 0;
     this.father = null;
     this.name = name;
     this.initTime = null;
@@ -20,10 +18,6 @@ public abstract class Item{
   }
 
   protected abstract Duration getDurationBetween(LocalDateTime ini, LocalDateTime end);
-
-  public int getTam() {
-    return tam;
-  }
 
   public Project getFather() {
     return father;
@@ -45,10 +39,6 @@ public abstract class Item{
     return active;
   }
 
-  public void setTam(int tam) {
-    this.tam = tam;
-  }
-
   public void setFather(Project father) {
     this.father = father;
   }
@@ -67,25 +57,33 @@ public abstract class Item{
     this.totalTime = totalTime;
   }
 
-  public void setActive(boolean active) {this.active = active;}
+  public void setActive(boolean active) {
+    this.active = active;
+    if (father != null) {
+      this.father.setActive(active);
+    }
+  }
 
   public abstract void acceptVisitor(Visitor v);
 
   public void updateEnd(LocalDateTime end) {
     this.endTime = end;
-    if (father != null)
+    if (father != null) {
       father.updateEnd(end);
+    }
   }
 
   public void updateIni(LocalDateTime ini){
     this.initTime = ini;
-    if(father != null && father.getInitTime() == null)
+    if(father != null && father.getInitTime() == null) {
       father.updateIni(ini);
+    }
   }
 
   public void updateTotalTime(Duration d){
     totalTime = this.totalTime.plus(d);
-    if (father != null)
+    if (father != null) {
       father.updateTotalTime(d);
+    }
   }
 }

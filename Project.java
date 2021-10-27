@@ -56,23 +56,18 @@ public class Project extends Item {
     this.item = item;
   }
 
-  public Item getSonItem(String name){
-    return null;
-  }
-
   @Override
   public void acceptVisitor(Visitor v){
     v.visitProject(this);
-    for (int i = 0; i < item.size(); i++){
-      item.get(i).acceptVisitor(v);
-    }
   }
 
   @Override
   public void setInitTime(LocalDateTime initTime) {
     this.initTime = initTime;
-    if(father!=null)
-      if(father.getInitTime()==null)
+    if(father!=null) {
+      if (father.getInitTime() == null) {
         father.setInitTime(LocalDateTime.now());
+      }
+    }
   }
 }
