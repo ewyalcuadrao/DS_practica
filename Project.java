@@ -4,16 +4,21 @@ import java.time.*;
 public class Project extends Item {
   protected ArrayList<Item> item;
 
-  public Project(String name) {
-    super(name);
-    item = new ArrayList<Item>();
+  public Project(String name, Project father) {
+    super(name, father);
+    if (this.father != null) {
+      this.father.addItem(this);
+    }
+    this.item = new ArrayList<Item>();
   }
 
-  public Project(String name, Project father) {
-    super(name);
-    this.father=father;
-    this.father.addTask(this);
-    this.item = new ArrayList<Item>();
+  public Project(Project p)
+  {
+    super(p.getName(), p.getFather(), p.getInitTime(), p.getEndTime(), p.getTotalTime(), p.isActive());
+    this.item = p.getItem();
+    if (this.father != null) {
+      this.father.addItem(this);
+    }
   }
 
   @Override
@@ -25,8 +30,8 @@ public class Project extends Item {
     return duration;
   }
 
-  public void addTask(Item task){
-    item.add(task);
+  public void addItem(Item it){
+    item.add(it);
   }
 
   public void createNewTask(String name) {

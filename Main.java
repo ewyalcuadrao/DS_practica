@@ -9,7 +9,8 @@ public class Main {
     }
     private static void simpleTest() {
         try {
-            Project root = new Project("root");
+            /*
+            Project root = new Project("root", null);
 
             Project SD = new Project("Software Design", root);
             Project ST = new Project("Software Testing", root);
@@ -49,7 +50,13 @@ public class Main {
             TT.startWorking();
             Thread.sleep(4000);
             TT.stopWorking();
-
+            Json json = new Json(root, "./file.json");
+            json.save(root);
+            json.close();
+            System.out.println("JSON file done :)");
+            */
+            Fichero file = new Fichero("./quenoexiste.json");
+            file.readJSONFile("./file.json");
         } catch (Exception e) {
             e.printStackTrace();
         }

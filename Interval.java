@@ -20,11 +20,20 @@ public class Interval implements Observer{
     this.updateEnd(endTime);
   }
 
+  public Interval(Interval i){
+    this.father = i.getFather();
+    this.initTime = i.getInitTime();
+    this.endTime = i.getEndTime();
+    this.duration = i.getDuration();
+    this.clock = ClockTimer.getInstance();
+    this.clock.addObserver(this);
+  }
+
   public void stopInterval() {
     clock.deleteObserver(this);
   }
 
-  public Duration getInterval() {
+  public Duration getDuration() {
     return duration;
   }
 
@@ -63,4 +72,5 @@ public class Interval implements Observer{
       father.updateIni(ini);
     }
   }
+
 }

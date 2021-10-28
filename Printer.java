@@ -37,7 +37,7 @@ public class Printer implements Visitor, Observer{
     System.out.printf("%-31s %-30s %-30s %s\n",
         "Interval: ", i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
         i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
-        i.getInterval().toSeconds());
+        i.getDuration().toSeconds());
   }
 
   @Override
@@ -61,6 +61,8 @@ public class Printer implements Visitor, Observer{
 
   @Override
   public void update(Observable o, Object arg) {
-    Groot.acceptVisitor(this);
+    if (Groot.isActive()) {
+      Groot.acceptVisitor(this);
+    }
   }
 }

@@ -7,11 +7,17 @@ public class Task extends Item{
 
   public Task(String name, Project father)
   {
-    super(name);
-    this.father = father;
-    this.interval = new ArrayList();
-    this.father.addTask(this);
+    super(name, father);
+    this.interval = new ArrayList<Interval>();
+    this.father.addItem(this);
   }
+
+  public Task(Task t){
+    super(t.name, t.father, t.initTime, t.endTime, t.totalTime, t.active);
+    this.interval = t.getIntervals();
+    this.father.addItem(this);
+  }
+
 
   protected void startWorking()
   {
@@ -28,7 +34,7 @@ public class Task extends Item{
     active = false;
     father.setActive(false);
     interval.get(interval.size()-1).stopInterval();
-    this.updateTotalTime(interval.get(interval.size()-1).getInterval());
+    this.updateTotalTime(interval.get(interval.size()-1).getDuration());
     System.out.println(this.name + " stops");
   }
 
@@ -42,7 +48,7 @@ public class Task extends Item{
           (interval.get(i).getEndTime().isBefore(end) || interval.get(i).getEndTime().isEqual(end));
 
       if (cond)
-          duration = duration.plus(interval.get(i).getInterval());
+          duration = duration.plus(interval.get(i).getDuration());
     }
     return duration;
   }
@@ -54,7 +60,7 @@ public class Task extends Item{
       return this.totalTime;
     else
     {
-      Duration d = interval.get(interval.size()-1).getInterval();
+      Duration d = interval.get(interval.size()-1).getDuration();
       return this.totalTime.plus(d);
      }
   }
@@ -66,5 +72,8 @@ public class Task extends Item{
 
   public Interval getLastInterval(){
     return interval.get(interval.size()-1);
+  }
+  public ArrayList<Interval> getIntervals(){
+    return interval;
   }
 }

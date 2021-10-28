@@ -8,13 +8,22 @@ public abstract class Item{
   protected Duration totalTime;
   protected boolean active;
 
-  public Item(String name){
-    this.father = null;
+  public Item(String name, Project father){
+    this.father = father;
     this.name = name;
     this.initTime = null;
     this.endTime = null;
     this.totalTime = Duration.ZERO;
     this.active = false;
+  }
+
+  public Item(String name, Project father, LocalDateTime initTime, LocalDateTime endTime, Duration totalTime, boolean active) {
+    this.name = name;
+    this.father = father;
+    this.initTime = initTime;
+    this.endTime = endTime;
+    this.totalTime = totalTime;
+    this.active = active;
   }
 
   protected abstract Duration getDurationBetween(LocalDateTime ini, LocalDateTime end);
