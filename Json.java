@@ -6,6 +6,7 @@ public class Json implements Visitor{
     private Project Groot;
     File file;
     String jsonString="";
+
     public Json(Project root, String path){
         Groot = root;
         file = new File(path);
@@ -18,7 +19,7 @@ public class Json implements Visitor{
 
     public void saveRoot(Item i){
         if(Groot == null) {
-            if (i.father != null)
+            if (i.father != null) //comprovamos que el proyecto que nos pasan es root i en caso contrario se llama al padre
                 saveRoot(i.father);
             else {
                 JSONArray jsonArray2= new JSONArray();
@@ -35,12 +36,13 @@ public class Json implements Visitor{
     public void jsonator(Interval i,JSONArray jsonArray) {
         JSONObject json = new JSONObject();
         try {
+            //Guardamos toda la informacion del intervalo en un JSONObject
             json.put("class", "Interval");
             json.put("initTime", i.getInitTime());
             json.put("endTime", i.getEndTime());
             json.put("father", i.getFather().getName());
             json.put("duration", i.getDuration());
-            jsonArray.put(json);
+            jsonArray.put(json); //Añadimos el JSONObject al JSONarray
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -50,6 +52,7 @@ public class Json implements Visitor{
         JSONObject json = new JSONObject();
         JSONArray jsonArrayInterval= new JSONArray();
         try {
+            //Guardamos toda la informacion de la tarea en un JSONObject
             json.put("class", "Task");
             json.put("name", t.getName());
             json.put("father", t.getFather().getName());
@@ -73,7 +76,6 @@ public class Json implements Visitor{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     public void jsonator(Project p, JSONArray jsonArray) {
