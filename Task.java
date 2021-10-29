@@ -12,13 +12,6 @@ public class Task extends Item{
     this.father.addItem(this);
   }
 
-  public Task(Task t){
-    super(t.name, t.father, t.initTime, t.endTime, t.totalTime, t.active);
-    this.interval = t.getIntervals();
-    this.father.addItem(this);
-  }
-
-
   protected void startWorking()
   {
     if (!active) {

@@ -12,15 +12,6 @@ public class Project extends Item {
     this.item = new ArrayList<Item>();
   }
 
-  public Project(Project p)
-  {
-    super(p.getName(), p.getFather(), p.getInitTime(), p.getEndTime(), p.getTotalTime(), p.isActive());
-    this.item = p.getItem();
-    if (this.father != null) {
-      this.father.addItem(this);
-    }
-  }
-
   @Override
   protected Duration getDurationBetween(LocalDateTime ini, LocalDateTime end) {
     Duration duration = Duration.ZERO;

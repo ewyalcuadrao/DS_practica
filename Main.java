@@ -4,15 +4,18 @@
 public class Main {
 
     public static void main(String[] args) {
+        //Cargamos el arbol desde el fichero json
         File fi= new File("./tree.json");
         Project root = fi.readJson();
+        //Cuando no exista información del árbol pasaremos el test de apéndice B
         if (root == null) {
             simpleTest();
-        } else {
+        } else {//En caso contarario cargamos i mostramos toda la información del árbol
             testRead(root);
         }
         System.exit(0);
     }
+
     private static void simpleTest() {
         try {
             Project root = new Project("root", null);

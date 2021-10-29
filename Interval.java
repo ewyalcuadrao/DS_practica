@@ -11,22 +11,13 @@ public class Interval implements Observer{
 
   public Interval(Task father) {
     this.father = father;
-    this.duration = Duration.ZERO.plusSeconds(ClockTimer.getPeriode());
     this.clock = ClockTimer.getInstance();
+    this.duration = Duration.ZERO.plusSeconds(ClockTimer.getPeriode());
     this.clock.addObserver(this);
     this.initTime = LocalDateTime.now().minusSeconds(ClockTimer.getPeriode());
     this.updateIni(initTime);
     this.endTime = LocalDateTime.now();
     this.updateEnd(endTime);
-  }
-
-  public Interval(Interval i){
-    this.father = i.getFather();
-    this.initTime = i.getInitTime();
-    this.endTime = i.getEndTime();
-    this.duration = i.getDuration();
-    this.clock = ClockTimer.getInstance();
-    this.clock.addObserver(this);
   }
 
   public void stopInterval() {
@@ -39,12 +30,10 @@ public class Interval implements Observer{
 
   @Override
   public void update(Observable o, Object arg) {
-    if(o == clock) {
-      //Utilizamos endtime como tiempo actual porque al salir del programa se quedara con el último tiempo
-      LocalDateTime dateTime = (LocalDateTime) arg;
-      this.updateEnd(dateTime);
-      this.duration = this.duration.plusSeconds(ClockTimer.getPeriode());
-    }
+    //Utilizamos endtime como tiempo actual para que al salir del programa se quede con el último tiempo
+    LocalDateTime dateTime = (LocalDateTime) arg;
+    this.updateEnd(dateTime);
+    this.duration = this.duration.plusSeconds(ClockTimer.getPeriode());
   }
 
   public LocalDateTime getInitTime() {
