@@ -24,10 +24,12 @@ public class Json implements Visitor{
                 JSONArray jsonArray2= new JSONArray();
                 Groot = (Project) i;
                 jsonator(Groot,jsonArray2 );
+                System.out.println("Data saved successfully");
             }
         }else{
             JSONArray jsonArray2= new JSONArray();
             jsonator(Groot,jsonArray2 );
+            System.out.println("Data saved successfully");
         }
     }
     public void jsonator(Interval i,JSONArray jsonArray) {

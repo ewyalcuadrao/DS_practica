@@ -107,6 +107,15 @@ class File{
 + writeJSONFile(json : JSONObject)
 }
 
+class PrintTree{
+- clock : ClockTimer
+- root : Project
++ PrintTree(root : Project)
++ visitTask(t : Task)
++ visitInterval(i : Interval)
++ visitProject(p : Project)
+}
+
 Item <|--- Project
 Item <|--- Task
 Item "*"<---*"1" Project : items
@@ -117,4 +126,5 @@ Observer <|.. Printer
 Visitor <|.. Printer
 Visitor <|.. Json
 File "1"<--"1" Json : file
+Visitor <|.. PrinterTree
 @enduml
