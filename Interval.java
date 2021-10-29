@@ -73,4 +73,16 @@ public class Interval implements Observer{
     }
   }
 
+  public void setInitTime(LocalDateTime ini){
+    this.initTime = ini;
+  }
+
+  public void setEndTime(LocalDateTime end){
+    this.endTime = end;
+  }
+
+  public void setDuration(Duration d){
+    this.duration = d;
+  }
+
 }

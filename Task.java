@@ -70,10 +70,15 @@ public class Task extends Item{
     v.visitTask(this);
   }
 
+
   public Interval getLastInterval(){
     return interval.get(interval.size()-1);
   }
   public ArrayList<Interval> getIntervals(){
     return interval;
+  }
+
+  public void addInterval(Interval i){
+    interval.add(i);
   }
 }
