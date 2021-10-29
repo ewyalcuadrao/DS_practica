@@ -22,15 +22,15 @@ public class File {
       root.setInitTime(LocalDateTime.parse(obj.getString("init")));
       root.setTotalTime(Duration.parse(obj.getString("totalTime")));
       root.setEndTime(LocalDateTime.parse(obj.getString("end")));
-      JSONArray arr = obj.getJSONArray("item"); // notice tha
+      JSONArray arr = obj.getJSONArray("item");
       int i = 0;
-      recorrerJsonArrayItem(arr, root);// t `"posts": [...]`
+      recorrerJsonArrayItem(arr, root);
       return root;
     }
     catch (Exception e){
       e.printStackTrace();
+      return null;
     }
-    return null;
   }
 
   private void recorrerJsonArrayItem(JSONArray arr, Project father) {
