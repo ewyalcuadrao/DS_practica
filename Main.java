@@ -1,5 +1,4 @@
 //import com.google.gson.Gson;
-import org.json.JSONObject;
 
 
 public class Main {
@@ -11,7 +10,7 @@ public class Main {
         try {
 
             File fi= new File("./tree.json");
-            Project root = fi.leerJson();
+            Project root = fi.readJson();
             System.out.println("File read :)");
 
             if (root == null) {
@@ -55,7 +54,7 @@ public class Main {
                 Thread.sleep(4000);
                 TT.stopWorking();
                 Json json = new Json(root, "./tree.json");
-                json.isRoot(root);
+                json.saveRoot(root);
                 System.out.println("JSON file done :)");
             }
             System.exit(0);

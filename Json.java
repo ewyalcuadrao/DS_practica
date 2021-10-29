@@ -4,21 +4,22 @@ import org.json.JSONObject;
 
 public class Json implements Visitor{
     private Project Groot;
-    File fichero;
+    File file;
     String jsonString="";
     public Json(Project root, String path){
         Groot = root;
-        fichero = new File(path);
+        file = new File(path);
     }
+
     public Json(String path){
         Groot = null;
-        fichero = new File(path);
+        file = new File(path);
     }
-    public void isRoot(Item i){
-        Project p = null;
+
+    public void saveRoot(Item i){
         if(Groot == null) {
             if (i.father != null)
-                isRoot(i.father);
+                saveRoot(i.father);
             else {
                 JSONArray jsonArray2= new JSONArray();
                 Groot = (Project) i;
@@ -105,7 +106,7 @@ public class Json implements Visitor{
             json.put("item", jsonArrayItem);
             jsonArray.put(json);
             if(p.getName()=="root")
-                fichero.writeJSONFile(json);
+                file.writeJSONFile(json);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -115,7 +116,7 @@ public class Json implements Visitor{
 
     @Override
     public void visitTask(Task t) {
-        isRoot(t);
+        saveRoot(t);
     }
 
     @Override
@@ -125,6 +126,6 @@ public class Json implements Visitor{
 
     @Override
     public void visitProject(Project p) {
-        isRoot(p);
+        saveRoot(p);
     }
 }

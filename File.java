@@ -12,7 +12,7 @@ public class File {
     this.path = path;
   }
 
-  public Project leerJson() {
+  public Project readJson() {
     try {
       JSONParser parser = new JSONParser();
       Object json = parser.parse(new FileReader(path));
@@ -25,10 +25,11 @@ public class File {
       JSONArray arr = obj.getJSONArray("item");
       int i = 0;
       recorrerJsonArrayItem(arr, root);
+      System.out.println("Data from " + path + " restored");
       return root;
     }
     catch (Exception e){
-      e.printStackTrace();
+      System.out.println("File " + path + " not found");
       return null;
     }
   }
