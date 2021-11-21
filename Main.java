@@ -20,18 +20,34 @@ public class Main {
     try {
       Project root = new Project("root", null);
 
-      Project sd = new Project("Software Design", root);
-      Project st = new Project("Software Testing", root);
-      Project db = new Project("Databases", root);
+      Project sd = new Project("Software Design", root, new String[]{"java", "flutter"});
+      Project st = new Project("Software Testing", root, new String[]{"c++", "Java", "python"});
+      Project db = new Project("Databases", root, new String[]{"SQL", "python", "C++"});
       Task tt = new Task("Transportation", root);
       Project pp = new Project("Problems", sd);
       Project ptr = new Project("Project Time Tracker", sd);
-      Task tfl = new Task("First list", pp);
-      Task tsl = new Task("Second list", pp);
+      Task tfl = new Task("First list", pp, new String[]{"java"});
+      Task tsl = new Task("Second list", pp, new String[]{"Dart"});
       Task rh = new Task("Read handout", ptr);
-      Task fm = new Task("First milestone", ptr);
+      Task fm = new Task("First milestone", ptr, new String[]{"Java", "IntelliJ"});
 
       Printer printer = new Printer(root);
+      TagSearcher tg = new TagSearcher(root);
+      String tag1 = "Java";
+      System.out.println("\nWith tag: " + tag1);
+      tg.searchTask(tag1);
+      String tag2 = "python";
+      System.out.println("\nWith tag: " + tag2);
+      tg.searchTask(tag2);
+      String tag3 = "Dart";
+      System.out.println("\nWith tag: " + tag3);
+      tg.searchTask(tag3);
+      String tag4 = "java";
+      System.out.println("\nWith tag: " + tag4);
+      tg.searchTask(tag4);
+      String tag5 = "c++";
+      System.out.println("\nWith tag: " + tag5);
+      tg.searchTask(tag5);
 
       System.out.println("Start test");
       //1. start task transportation, wait 4 seconds and then stop it
