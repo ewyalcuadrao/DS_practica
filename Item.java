@@ -1,6 +1,7 @@
-import java.time.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
-public abstract class Item{
+public abstract class Item {
   protected Project father;
   protected String name;
   protected LocalDateTime initTime;
@@ -8,7 +9,7 @@ public abstract class Item{
   protected Duration totalTime;
   protected boolean active;
 
-  public Item(String name, Project father){
+  public Item(String name, Project father) {
     this.father = father;
     this.name = name;
     this.initTime = null;
@@ -17,7 +18,8 @@ public abstract class Item{
     this.active = false;
   }
 
-  public Item(String name, Project father, LocalDateTime initTime, LocalDateTime endTime, Duration totalTime, boolean active) {
+  public Item(String name, Project father, LocalDateTime initTime,
+              LocalDateTime endTime, Duration totalTime, boolean active) {
     this.name = name;
     this.father = father;
     this.initTime = initTime;
@@ -36,7 +38,9 @@ public abstract class Item{
     return name;
   }
 
-  public LocalDateTime getInitTime() {return initTime;}
+  public LocalDateTime getInitTime() {
+    return initTime;
+  }
 
   public LocalDateTime getEndTime() {
     return endTime;
@@ -56,7 +60,9 @@ public abstract class Item{
     this.name = name;
   }
 
-  public void setInitTime(LocalDateTime initTime) {this.initTime = initTime;}
+  public void setInitTime(LocalDateTime initTime) {
+    this.initTime = initTime;
+  }
 
   public void setEndTime(LocalDateTime endTime) {
     this.endTime = endTime;
@@ -82,14 +88,14 @@ public abstract class Item{
     }
   }
 
-  public void updateIni(LocalDateTime ini){
+  public void updateIni(LocalDateTime ini) {
     this.initTime = ini;
-    if(father != null && father.getInitTime() == null) {
+    if (father != null && father.getInitTime() == null) {
       father.updateIni(ini);
     }
   }
 
-  public void updateTotalTime(Duration d){
+  public void updateTotalTime(Duration d) {
     totalTime = this.totalTime.plus(d);
     if (father != null) {
       father.updateTotalTime(d);
