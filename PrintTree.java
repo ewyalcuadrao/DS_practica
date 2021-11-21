@@ -1,16 +1,15 @@
-import java.time.LocalDateTime;
-import java.time.format.*;
-import java.util.Observable;
-import java.util.Observer;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
-public class PrintTree implements Visitor{
 
-  private Project Groot;
+public class PrintTree implements Visitor {
+  private Project groot;
 
-  public PrintTree(Project root){
-    this.Groot = root;
-    System.out.printf("%-30s %-30s %-30s %-30s %s\n", "Item", "Parent", "Initial time", "End time", "Seconds");
-    Groot.acceptVisitor(this);
+  public PrintTree(Project root) {
+    this.groot = root;
+    System.out.printf("%-30s %-30s %-30s %-30s %s\n",
+        "Item", "Parent", "Initial time", "End time", "Seconds");
+    groot.acceptVisitor(this);
   }
 
   @Override
@@ -18,13 +17,15 @@ public class PrintTree implements Visitor{
     String initTime = "null";
     String endTime = "null";
 
-    if (t.getInitTime() != null)
+    if (t.getInitTime() != null) {
       initTime = t.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
-    if (t.getEndTime() != null)
+    }
+    if (t.getEndTime() != null) {
       endTime = t.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
-
+    }
     System.out.printf("%-30s %-30s %-30s %-30s %s\n",
-        "Task " + t.getName(), "child of " + t.getFather().getName(), initTime, endTime, t.getTotalTime().toSeconds());
+        "Task " + t.getName(),
+        "child of " + t.getFather().getName(), initTime, endTime, t.getTotalTime().toSeconds());
   }
 
   @Override
@@ -42,15 +43,19 @@ public class PrintTree implements Visitor{
     String initTime = "null";
     String endTime = "null";
 
-    if (p.getFather() != null)
+    if (p.getFather() != null) {
       fatherName = p.getFather().getName();
-    if (p.getInitTime() != null)
+    }
+    if (p.getInitTime() != null) {
       initTime = p.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
-    if (p.getEndTime() != null)
+    }
+    if (p.getEndTime() != null) {
       endTime = p.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+    }
 
     System.out.printf("%-30s %-30s %-30s %-30s %s\n",
-        "Projecte " + p.getName(), "child of " + fatherName, initTime, endTime, p.getTotalTime().toSeconds());
+        "Projecte " + p.getName(),
+        "child of " + fatherName, initTime, endTime, p.getTotalTime().toSeconds());
 
     for (int i = 0; i < p.getItem().size(); i++) {
       p.getItem().get(i).acceptVisitor(this);
