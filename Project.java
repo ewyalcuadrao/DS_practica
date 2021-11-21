@@ -1,5 +1,7 @@
-import java.util.*;
-import java.time.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 
 public class Project extends Item {
   protected ArrayList<Item> item;
@@ -21,7 +23,7 @@ public class Project extends Item {
     return duration;
   }
 
-  public void addItem(Item it){
+  public void addItem(Item it) {
     item.add(it);
   }
 
@@ -31,10 +33,10 @@ public class Project extends Item {
   }
 
   @Override
-  public Duration getTotalTime(){
+  public Duration getTotalTime() {
     this.totalTime = Duration.ZERO;
     for (int i = 0; i < item.size(); i++) {
-      this.totalTime=this.totalTime.plus(item.get(i).getTotalTime());
+      this.totalTime = this.totalTime.plus(item.get(i).getTotalTime());
     }
     return this.totalTime;
   }
@@ -53,14 +55,14 @@ public class Project extends Item {
   }
 
   @Override
-  public void acceptVisitor(Visitor v){
+  public void acceptVisitor(Visitor v) {
     v.visitProject(this);
   }
 
   @Override
   public void setInitTime(LocalDateTime initTime) {
     this.initTime = initTime;
-    if(father!=null) {
+    if (father != null) {
       if (father.getInitTime() == null) {
         father.setInitTime(LocalDateTime.now());
       }
