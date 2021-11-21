@@ -1,8 +1,10 @@
-import java.time.*;
-import java.util.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class Interval implements Observer{
+public class Interval implements Observer {
   private ClockTimer clock;
   private LocalDateTime initTime;
   private Duration duration;
@@ -30,7 +32,7 @@ public class Interval implements Observer{
 
   @Override
   public void update(Observable o, Object arg) {
-    //Utilizamos endtime como tiempo actual para que al salir del programa se quede con el último tiempo
+    //endtime sirve como tiempo actual para que al salir del programa se quede con el último tiempo
     LocalDateTime dateTime = (LocalDateTime) arg;
     this.updateEnd(dateTime);
     this.duration = this.duration.plusSeconds(ClockTimer.getPeriode());
@@ -44,33 +46,35 @@ public class Interval implements Observer{
     return endTime;
   }
 
-  public void acceptVisitor(Visitor v){
+  public void acceptVisitor(Visitor v) {
     v.visitInterval(this);
   }
 
-  public Task getFather() {return this.father;}
+  public Task getFather() {
+    return this.father;
+  }
 
   public void updateEnd(LocalDateTime end) {
     this.endTime = end;
     this.father.updateEnd(end);
   }
 
-  public void updateIni(LocalDateTime ini){
+  public void updateIni(LocalDateTime ini) {
     this.initTime = ini;
-    if(father.getInitTime() == null) {
+    if (father.getInitTime() == null) {
       father.updateIni(ini);
     }
   }
 
-  public void setInitTime(LocalDateTime ini){
+  public void setInitTime(LocalDateTime ini) {
     this.initTime = ini;
   }
 
-  public void setEndTime(LocalDateTime end){
+  public void setEndTime(LocalDateTime end) {
     this.endTime = end;
   }
 
-  public void setDuration(Duration d){
+  public void setDuration(Duration d) {
     this.duration = d;
   }
 
