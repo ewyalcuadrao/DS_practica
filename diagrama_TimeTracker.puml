@@ -28,8 +28,6 @@ class Project{
 + Project(name : String, father : Project)
 # getDurationBetween(ini : LocalDateTime, end : LocalDateTime) : Duration
 + addTask(task : Task)
-+ createNewTask(name : String)
-+ createNewProject(name : String)
 + getTotalTime() : Duration
 + acceptVisitor(v : Visitor)
 }
