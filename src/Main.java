@@ -1,4 +1,8 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 public class Main {
+
+  static Logger logger = LoggerFactory.getLogger("Main");
 
   public static void main(String[] args) {
     //Cargamos el arbol desde el fichero json
@@ -41,7 +45,7 @@ public class Main {
       String tag5 = "c++";
       tg.searchTask(tag5);
 
-      System.out.println("Start test");
+      logger.info("Start test");
       //1. start task transportation, wait 4 seconds and then stop it
       tt.startWorking();
       Thread.sleep(4000);

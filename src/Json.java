@@ -45,7 +45,7 @@ public class Json implements Visitor {
       json.put("endTime", i.getEndTime());
       json.put("father", i.getFather().getName());
       json.put("duration", i.getDuration());
-      jsonArray.put(json); //Añadimos el JSONObject al JSONarray
+      jsonArray.put(json); //Añadimos el JSONObject a
     } catch (JSONException e) {
       e.printStackTrace();
     }

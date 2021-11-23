@@ -1,10 +1,15 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+
 public class Task extends Item {
 
   private ArrayList<Interval> interval;
+  static Logger logger = LoggerFactory.getLogger("Item.Task");
 
   public Task(String name, Project father) {
     super(name, father);
@@ -25,7 +30,7 @@ public class Task extends Item {
       active = true;
       father.setActive(true);
       interval.add(i);
-      System.out.println(this.name + " starts");
+      logger.info(this.name + " starts");
     }
     assert(invariant());
     assert(!interval.isEmpty());
@@ -38,7 +43,7 @@ public class Task extends Item {
     father.setActive(false);
     interval.get(interval.size() - 1).stopInterval();
     this.updateTotalTime(interval.get(interval.size() - 1).getDuration());
-    System.out.println(this.name + " stops");
+    logger.info(this.name + " stops");
     assert(invariant());
     assert (!active);
     assert(totalTime.isZero() || totalTime.compareTo(Duration.ZERO) > 0);

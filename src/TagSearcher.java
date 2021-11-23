@@ -1,7 +1,12 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
+
 
 public class TagSearcher implements Visitor {
   private Project groot;
+  static Logger logger = LoggerFactory.getLogger("Visitor.TagSearcher");
 
   private String tag;
   protected ArrayList<Item> tagfound;
@@ -17,7 +22,7 @@ public class TagSearcher implements Visitor {
     for (int j = 0; j < tasktag.length; j++) {
       if (tasktag[j].equals(this.tag)) {
         tagfound.add(t);
-        System.out.println(t.getName());
+        logger.info(t.getName());
         j = tasktag.length;
       }
     }
@@ -36,7 +41,7 @@ public class TagSearcher implements Visitor {
         //TODO: Podemos hacerlo así o printando cada vez que encuentre uno, pongo las dos maneras
         tagfound.add(p);
         String name = p.getName();
-        System.out.println(name);
+        logger.info(name);
       }
     }
     for (int i = 0; i < p.getItem().size(); i++) {
