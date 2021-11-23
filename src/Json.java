@@ -109,7 +109,7 @@ public class Json implements Visitor {
       }
       json.put("item", jsonArrayItem);
       jsonArray.put(json);
-      if (p.getName() == "root") {
+      if (p.getName().equals("root")) {
         file.writeJsonFile(json);
       }
     } catch (JSONException e) {

@@ -28,7 +28,7 @@ public class Project extends Item {
     assert(invariant());
     Duration duration = Duration.ZERO;
     for (int i = 0; i < item.size(); i++) {
-      duration.plus(item.get(i).getDurationBetween(ini, end));
+      duration = duration.plus(item.get(i).getDurationBetween(ini, end));
     }
     assert(invariant());
     assert(duration.compareTo(duration.ZERO) == 1 || duration.compareTo(duration.ZERO) == 0);

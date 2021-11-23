@@ -41,7 +41,7 @@ public class Task extends Item {
     System.out.println(this.name + " stops");
     assert(invariant());
     assert (!active);
-    assert(totalTime.isZero() || totalTime.compareTo(Duration.ZERO) == 1);
+    assert(totalTime.isZero() || totalTime.compareTo(Duration.ZERO) > 0);
   }
 
   @Override
@@ -61,7 +61,7 @@ public class Task extends Item {
       }
     }
     assert (invariant());
-    assert(totalTime.isZero() || totalTime.compareTo(Duration.ZERO) == 1);
+    assert(totalTime.isZero() || totalTime.compareTo(Duration.ZERO) > 0);
     return duration;
   }
 
@@ -76,7 +76,7 @@ public class Task extends Item {
       total =  this.totalTime.plus(d);
     }
     assert(invariant());
-    assert(total.isZero() || total.compareTo(Duration.ZERO) == 1);
+    assert(total.isZero() || total.compareTo(Duration.ZERO) > 0);
     return total;
   }
 

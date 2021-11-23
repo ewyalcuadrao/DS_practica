@@ -32,7 +32,6 @@ public class TagSearcher implements Visitor {
   public void visitProject(Project p) {
     String[] projecttag = p.getTag();
     for (int j = 0; j < projecttag.length; j++) {
-      String js = projecttag[j];
       if (projecttag[j].equals(this.tag)) {
         //TODO: Podemos hacerlo así o printando cada vez que encuentre uno, pongo las dos maneras
         tagfound.add(p);

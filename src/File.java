@@ -30,7 +30,6 @@ public class File {
       root.setTotalTime(Duration.parse(obj.getString("totalTime")));
       root.setEndTime(LocalDateTime.parse(obj.getString("end")));
       JSONArray arr = obj.getJSONArray("item");
-      int i = 0;
       recorrerJsonArrayItem(arr, root);
       System.out.println("Data from " + path + " restored");
       return root;
@@ -47,11 +46,9 @@ public class File {
         JSONObject jsonObject = arr.getJSONObject(i);
         if (arr.getJSONObject(i).getString("class").equals("Project")) {
           createProject(jsonObject, father);
-          JSONArray arr3 = arr.getJSONObject(i).getJSONArray("item");
           i++;
         } else if (arr.getJSONObject(i).getString("class").equals("Task")) {
           createTask(jsonObject, father);
-          JSONArray arr3 = arr.getJSONObject(i).getJSONArray("interval");
           i++;
         } else {
           i++;
