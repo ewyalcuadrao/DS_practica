@@ -45,7 +45,7 @@ public class Main {
       String tag5 = "c++";
       tg.searchTask(tag5);
 
-      logger.info("Start test");
+      logger.warn("Start test");
       //1. start task transportation, wait 4 seconds and then stop it
       tt.startWorking();
       Thread.sleep(4000);

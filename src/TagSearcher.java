@@ -50,7 +50,7 @@ public class TagSearcher implements Visitor {
   }
 
   public void searchTask(String tag) {
-    logger.info("With tag: " + tag);
+    logger.warn("RESULTS FOR TASKS WITH TAG " + tag + ":");
     this.tag = tag;
     groot.acceptVisitor(this);
   }

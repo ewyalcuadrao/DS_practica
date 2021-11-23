@@ -1,14 +1,21 @@
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class PrintTree implements Visitor {
   private Project root;
+  static Logger logger = LoggerFactory.getLogger("Visitor.PrintTree");
 
   public PrintTree(Project root) {
     this.root = root;
-    System.out.printf("%-30s %-30s %-30s %-30s %s\n",
-        "Item", "Parent", "Initial time", "End time", "Seconds");
+    logger.info("{} {} {} {} {}",
+        String.format("%-30s","Item"),
+        String.format("%-30s","Parent"),
+        String.format("%-30s", "Initial time"),
+        String.format("%-30s", "End time"),
+        "Seconds");
     root.acceptVisitor(this);
   }
 
@@ -24,17 +31,21 @@ public class PrintTree implements Visitor {
     if (t.getEndTime() != null) {
       endTime = t.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
-    System.out.printf("%-30s %-30s %-30s %-30s %s\n",
-        "Task " + t.getName(),
-        "child of " + t.getFather().getName(), initTime, endTime, t.getTotalTime().toSeconds());
+    logger.info("{} {} {} {} {}",
+        String.format("%-30s", "Task " + t.getName()),
+        String.format("%-30s","child of " + t.getFather().getName()),
+        String.format("%-30s", initTime),
+        String.format("%-30s", endTime),
+        t.getTotalTime().toSeconds());
   }
 
   @Override
   public void visitInterval(Interval i) {
-    System.out.printf("%-30s %-30s %-30s %-30s %s\n",
-        "Interval ", "child of " + i.getFather().getName(),
-        i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
-        i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
+    logger.info("{} {} {} {} {}",
+        String.format("%-30s", "Interval "),
+        String.format("%-30s", "child of " + i.getFather().getName()),
+        String.format("%-30s", i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
+        String.format("%-30s", i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
         i.getDuration().toSeconds());
   }
 
@@ -53,10 +64,12 @@ public class PrintTree implements Visitor {
     if (p.getEndTime() != null) {
       endTime = p.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
-
-    System.out.printf("%-30s %-30s %-30s %-30s %s\n",
-        "Projecte " + p.getName(),
-        "child of " + fatherName, initTime, endTime, p.getTotalTime().toSeconds());
+    logger.info("{} {} {} {} {}",
+        String.format("%-30s", "Projecte " + p.getName()),
+        String.format("%-30s","child of " + fatherName),
+        String.format("%-30s", initTime),
+        String.format("%-30s", endTime),
+        p.getTotalTime().toSeconds());
     //Recorremos de forma recursiva el arbol de hijos del proyecto
     for (int i = 0; i < p.getItem().size(); i++) {
       p.getItem().get(i).acceptVisitor(this);

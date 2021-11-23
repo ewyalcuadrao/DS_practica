@@ -35,7 +35,7 @@ public class File {
       logger.warn("Data from " + path + " restored");
       return root;
     } catch (Exception e) {
-      logger.error("File " + path + " not found");
+      logger.warn("File " + path + " not found");
       return null;
     }
   }

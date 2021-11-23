@@ -30,7 +30,7 @@ public class Task extends Item {
       active = true;
       father.setActive(true);
       interval.add(i);
-      logger.info(this.name + " starts");
+      logger.warn(this.name + " starts");
     }
     assert(invariant());
     assert(!interval.isEmpty());
@@ -43,7 +43,7 @@ public class Task extends Item {
     father.setActive(false);
     interval.get(interval.size() - 1).stopInterval();
     this.updateTotalTime(interval.get(interval.size() - 1).getDuration());
-    logger.info(this.name + " stops");
+    logger.warn(this.name + " stops");
     assert(invariant());
     assert (!active);
     assert(totalTime.isZero() || totalTime.compareTo(Duration.ZERO) > 0);

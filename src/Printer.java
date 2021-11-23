@@ -2,17 +2,19 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Observable;
 import java.util.Observer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Printer implements Visitor, Observer {
 
   private ClockTimer clock;
   private Project root;
+  static Logger logger = LoggerFactory.getLogger("Visitor.Printer");
 
   public Printer(Project root) {
     this.root = root;
     this.clock = ClockTimer.getInstance();
     this.clock.addObserver(this);
-    System.out.printf("%-31s %-30s %-30s %s\n", "", "Initial time", "End time", "Seconds");
   }
 
   @Override
@@ -27,8 +29,12 @@ public class Printer implements Visitor, Observer {
     if (t.getEndTime() != null) {
       endTime = t.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
-    System.out.printf("%-10s %-20s %-30s %-30s %s\n",
-          "Task: ", t.getName(), initTime, endTime, t.getTotalTime().toSeconds());
+    logger.info("{} {} {} {} {}",
+          String.format("%-10s","Task: "),
+          String.format("%-20s",t.getName()),
+          String.format("%-30s", initTime),
+          String.format("%-30s", endTime),
+          t.getTotalTime().toSeconds());
 
     if (t.isActive()) {
       t.getLastInterval().acceptVisitor(this);
@@ -37,10 +43,10 @@ public class Printer implements Visitor, Observer {
 
   @Override
   public void visitInterval(Interval i) {
-    System.out.printf("%-31s %-30s %-30s %s\n",
-        "Interval: ",
-        i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
-        i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
+    logger.info("{} {} {} {}",
+        String.format("%-31s","Interval: "),
+        String.format("%-30s", i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
+        String.format("%-30s", i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
         i.getDuration().toSeconds());
   }
 
@@ -48,14 +54,25 @@ public class Printer implements Visitor, Observer {
   public void visitProject(Project p) {
     String initTime = "null";
     String endTime = "null";
+    if (p.getFather() == null){
+      logger.info("{} {} {} {}",
+          String.format("%-31s",""),
+          String.format("%-30s","Initial time"),
+          String.format("%-30s", "End time"),
+          "Seconds");
+    }
     if (p.getInitTime() != null) {
       initTime = p.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
     if (p.getEndTime() != null) {
       endTime = p.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
-    System.out.printf("%-10s %-20s %-30s %-30s %s\n",
-          "Project: ", p.getName(), initTime, endTime, p.getTotalTime().toSeconds());
+    logger.info("{} {} {} {} {}",
+        String.format("%-10s","Project: "),
+        String.format("%-20s",p.getName()),
+        String.format("%-30s", initTime),
+        String.format("%-30s", endTime),
+        p.getTotalTime().toSeconds());
 
     for (int i = 0; i < p.getItem().size(); i++) {
       if (p.getItem().get(i).isActive()) {
