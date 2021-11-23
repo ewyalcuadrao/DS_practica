@@ -1,11 +1,14 @@
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class Json implements Visitor {
   private Project root;
   private File file;
+  static Logger logger = LoggerFactory.getLogger("Visitor.Json");
 
   public Json(Project root, String path) {
     this.root = root;
@@ -25,12 +28,12 @@ public class Json implements Visitor {
         JSONArray jsonArray = new JSONArray();
         root = (Project) i;
         createJson(root, jsonArray);
-        System.out.println("Data saved successfully");
+        logger.warn("Data saved successfully");
       }
     } else {
       JSONArray jsonArray = new JSONArray();
       createJson(root, jsonArray);
-      System.out.println("Data saved successfully");
+      logger.warn("Data saved successfully");
     }
   }
 

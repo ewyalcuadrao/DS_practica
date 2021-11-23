@@ -7,12 +7,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
-
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class File {
   private String path;
+  static Logger logger = LoggerFactory.getLogger("File");
 
   public File(String path) {
     this.path = path;
@@ -31,10 +32,10 @@ public class File {
       root.setEndTime(LocalDateTime.parse(obj.getString("end")));
       JSONArray arr = obj.getJSONArray("item");
       recorrerJsonArrayItem(arr, root);
-      System.out.println("Data from " + path + " restored");
+      logger.warn("Data from " + path + " restored");
       return root;
     } catch (Exception e) {
-      System.out.println("File " + path + " not found");
+      logger.error("File " + path + " not found");
       return null;
     }
   }

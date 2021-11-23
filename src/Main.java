@@ -31,19 +31,14 @@ public class Main {
       Printer printer = new Printer(root);
       TagSearcher tg = new TagSearcher(root);
       String tag1 = "Java";
-      System.out.println("\nWith tag: " + tag1);
       tg.searchTask(tag1);
       String tag2 = "python";
-      System.out.println("\nWith tag: " + tag2);
       tg.searchTask(tag2);
       String tag3 = "Dart";
-      System.out.println("\nWith tag: " + tag3);
       tg.searchTask(tag3);
       String tag4 = "java";
-      System.out.println("\nWith tag: " + tag4);
       tg.searchTask(tag4);
       String tag5 = "c++";
-      System.out.println("\nWith tag: " + tag5);
       tg.searchTask(tag5);
 
       System.out.println("Start test");
