@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class File {
   private String path;
-  static Logger logger = LoggerFactory.getLogger("File");
+  static Logger logger = LoggerFactory.getLogger("Milestone1.File");
 
   public File(String path) {
     this.path = path;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Task extends Item {
 
   private ArrayList<Interval> interval;
-  static Logger logger = LoggerFactory.getLogger("Item.Task");
+  static Logger logger = LoggerFactory.getLogger("Milestone1.Item.Task");
 
   public Task(String name, Project father) {
     super(name, father);

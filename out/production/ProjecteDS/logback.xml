@@ -12,8 +12,23 @@
             </layout>
         </encoder>
     </appender>
+
     <root level="info">
         <appender-ref ref="console" />
         <appender-ref ref="html-file" />
     </root>
+
+    <!--
+    <logger name="Milestone1" level="info">
+        <appender-ref ref="console" />
+        <appender-ref ref="html-file" />
+    </logger>
+    -->
+
+    <!--
+    <logger name="Milestone2" level="info">
+        <appender-ref ref="console" />
+        <appender-ref ref="html-file" />
+    </logger>
+    -->
 </configuration>

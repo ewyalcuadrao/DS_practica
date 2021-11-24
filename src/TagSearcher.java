@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class TagSearcher implements Visitor {
   private Project groot;
-  static Logger logger = LoggerFactory.getLogger("Visitor.TagSearcher");
+  static Logger logger = LoggerFactory.getLogger("Milestone2.Visitor.TagSearcher");
 
   private String tag;
   protected ArrayList<Item> tagfound;

@@ -9,7 +9,7 @@ public class Printer implements Visitor, Observer {
 
   private ClockTimer clock;
   private Project root;
-  static Logger logger = LoggerFactory.getLogger("Visitor.Printer");
+  static Logger logger = LoggerFactory.getLogger("Milestone1.Visitor.Printer");
 
   public Printer(Project root) {
     this.root = root;

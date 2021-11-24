@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class PrintTree implements Visitor {
   private Project root;
-  static Logger logger = LoggerFactory.getLogger("Visitor.PrintTree");
+  static Logger logger = LoggerFactory.getLogger("Milestone1.Visitor.PrintTree");
 
   public PrintTree(Project root) {
     this.root = root;
