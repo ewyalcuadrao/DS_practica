@@ -9,3 +9,4 @@ Hemos hecho un timetracker con busqueda de tags, implementando las funciones a t
 
 Falta por hacer:
 - Meter mensajes de tipo Trace y Debug.
+- Mirar a ver si los tags deben de ser array o arraylist (TODO Borja).
