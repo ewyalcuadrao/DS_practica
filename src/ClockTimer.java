@@ -2,12 +2,15 @@ import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClockTimer extends Observable {
   private Timer timer;
   private LocalDateTime dateTime;
   private static ClockTimer instance = null;
   private static final int periode = 2; //seconds
+  private static Logger logger = LoggerFactory.getLogger("Milestone1.ClockTimer");
 
   private ClockTimer() {
     this.start();

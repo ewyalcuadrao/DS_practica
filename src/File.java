@@ -10,7 +10,6 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class File {
   private String path;
   static Logger logger = LoggerFactory.getLogger("Milestone1.File");
@@ -20,6 +19,7 @@ public class File {
   }
 
   public Project readJson() {
+    logger.trace("Method readJson");
     try {
       JSONParser parser = new JSONParser();
       Object json = parser.parse(new FileReader(path));
@@ -41,6 +41,7 @@ public class File {
   }
 
   private void recorrerJsonArrayItem(JSONArray arr, Project father) {
+    logger.trace("Method recorrerJsonArrayItem");
     int i = 0;
     try {
       while (i < arr.length()) {
@@ -61,6 +62,7 @@ public class File {
   }
 
   private void recorrerJsonArrayInterval(JSONArray arr, Task father) {
+    logger.trace("Method recorrerJsonArrayInterval");
     int i = 0;
     try {
       while (i < arr.length()) {
@@ -74,6 +76,7 @@ public class File {
   }
 
   public void createProject(JSONObject json, Project father) {
+    logger.trace("Method createProject");
     try {
       Project p = new Project(json.getString("name"), father);
       p.setActive((Boolean) json.getBoolean("active"));
@@ -96,6 +99,7 @@ public class File {
   }
 
   public void createTask(JSONObject json, Project father) {
+    logger.trace("Method createTask");
     try {
       Task t = new Task(json.getString("name"), father);
       t.setActive((Boolean) json.getBoolean("active"));
@@ -117,6 +121,7 @@ public class File {
   }
 
   public void createInterval(JSONObject json, Task father) {
+    logger.trace("Method createInterval");
     try {
       Interval i = new Interval(father);
       i.setInitTime(LocalDateTime.parse(json.getString("initTime")));
@@ -129,6 +134,7 @@ public class File {
   }
 
   public void writeJsonFile(JSONObject json) {
+    logger.trace("Method writeJsonFile");
     try {
       FileWriter file = new FileWriter(path);
       file.write(json.toString());

@@ -1,10 +1,13 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class Project extends Item {
   protected ArrayList<Item> item;
+  private static Logger logger = LoggerFactory.getLogger("Milestone1.Item.Project");
 
   public Project(String name, Project father, String[] tag) {
     super(name, father, tag);
