@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class TagSearcher implements Visitor {
   private Project root;
-  static Logger logger = LoggerFactory.getLogger("Milestone2.Visitor.TagSearcher");
+  private static Logger logger = LoggerFactory.getLogger("Milestone2.Visitor.TagSearcher");
 
   private String tag;
   protected ArrayList<Item> tagfound;
