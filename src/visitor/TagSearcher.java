@@ -1,13 +1,16 @@
 package visitor;
 
 import core.Interval;
+import core.Item;
 import core.Project;
 import core.Task;
+import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import core.*;
+
+
+
 
 public class TagSearcher implements Visitor {
   private Project root;
@@ -31,12 +34,12 @@ public class TagSearcher implements Visitor {
   @Override
   public void visitTask(Task t) {
     logger.trace("Method visitTask");
-    String[] tasktag = t.getTag();
-    for (int j = 0; j < tasktag.length; j++) {
-      if (tasktag[j].equals(this.tag)) {
+    ArrayList tasktag = t.getTag();
+    for (int j = 0; j < tasktag.size(); j++) {
+      if (tasktag.get(j).equals(this.tag)) {
         tagfound.add(t);
         logger.info(t.getName());
-        j = tasktag.length;
+        j = tasktag.size();
       }
     }
   }
@@ -49,10 +52,9 @@ public class TagSearcher implements Visitor {
   @Override
   public void visitProject(Project p) {
     logger.trace("Method visitProject");
-    String[] projecttag = p.getTag();
-    for (int j = 0; j < projecttag.length; j++) {
-      if (projecttag[j].equals(this.tag)) {
-        //TODO: Podemos hacerlo así o printando cada vez que encuentre uno, pongo las dos maneras
+    ArrayList projecttag = p.getTag();
+    for (int j = 0; j < projecttag.size(); j++) {
+      if (projecttag.get(j).equals(this.tag)) {
         tagfound.add(p);
         String name = p.getName();
         logger.info(name);

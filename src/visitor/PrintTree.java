@@ -1,11 +1,10 @@
 package visitor;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-
 import core.Interval;
 import core.Project;
 import core.Task;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +16,8 @@ public class PrintTree implements Visitor {
   public PrintTree(Project root) {
     this.root = root;
     logger.info("{} {} {} {} {}",
-        String.format("%-30s","core.Item"),
-        String.format("%-30s","Parent"),
+        String.format("%-30s", "core.Item"),
+        String.format("%-30s", "Parent"),
         String.format("%-30s", "Initial time"),
         String.format("%-30s", "End time"),
         "Seconds");
@@ -39,7 +38,7 @@ public class PrintTree implements Visitor {
     }
     logger.info("{} {} {} {} {}",
         String.format("%-30s", "core.Task " + t.getName()),
-        String.format("%-30s","child of " + t.getFather().getName()),
+        String.format("%-30s", "child of " + t.getFather().getName()),
         String.format("%-30s", initTime),
         String.format("%-30s", endTime),
         t.getTotalTime().toSeconds());
@@ -51,8 +50,10 @@ public class PrintTree implements Visitor {
     logger.info("{} {} {} {} {}",
         String.format("%-30s", "core.Interval "),
         String.format("%-30s", "child of " + i.getFather().getName()),
-        String.format("%-30s", i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
-        String.format("%-30s", i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
+        String.format("%-30s",
+            i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
+        String.format("%-30s",
+            i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
         i.getDuration().toSeconds());
   }
 
@@ -74,7 +75,7 @@ public class PrintTree implements Visitor {
     }
     logger.info("{} {} {} {} {}",
         String.format("%-30s", "Projecte " + p.getName()),
-        String.format("%-30s","child of " + fatherName),
+        String.format("%-30s", "child of " + fatherName),
         String.format("%-30s", initTime),
         String.format("%-30s", endTime),
         p.getTotalTime().toSeconds());

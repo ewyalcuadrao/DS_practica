@@ -7,6 +7,9 @@ import visitor.PrintTree;
 import visitor.Printer;
 import visitor.TagSearcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
   static Logger logger = LoggerFactory.getLogger("Main");
@@ -30,16 +33,16 @@ public class Main {
     try {
       Project root = new Project("root", null);
 
-      Project sd = new Project("Software Design", root, new String[]{"java", "flutter"});
-      Project st = new Project("Software Testing", root, new String[]{"c++", "Java", "python"});
-      Project db = new Project("Databases", root, new String[]{"SQL", "python", "C++"});
+      Project sd = new Project("Software Design", root, new ArrayList<String>(List.of("java", "flutter")));
+      Project st = new Project("Software Testing", root, new ArrayList<String>(List.of("c++", "Java", "python")));
+      Project db = new Project("Databases", root, new ArrayList<String>(List.of("SQL", "python", "C++")));
       Task tt = new Task("Transportation", root);
       Project pp = new Project("Problems", sd);
       Project ptr = new Project("core.Project Time Tracker", sd);
-      Task tfl = new Task("First list", pp, new String[]{"java"});
-      Task tsl = new Task("Second list", pp, new String[]{"Dart"});
+      Task tfl = new Task("First list", pp, new ArrayList<String>(List.of("java")));
+      Task tsl = new Task("Second list", pp, new ArrayList<String>(List.of("Dart")));
       Task rh = new Task("Read handout", ptr);
-      Task fm = new Task("First milestone", ptr, new String[]{"Java", "IntelliJ"});
+      Task fm = new Task("First milestone", ptr, new ArrayList<String>(List.of("Java", "IntelliJ")));
 
       Printer printer = new Printer(root);
       TagSearcher tg = new TagSearcher(root);

@@ -12,7 +12,7 @@ public class Project extends Item {
   protected ArrayList<Item> item;
   private static Logger logger = LoggerFactory.getLogger("Milestone1.Item.Project");
 
-  public Project(String name, Project father, String[] tag) {
+  public Project(String name, Project father, ArrayList<String> tag) {
     super(name, father, tag);
     if (this.father != null) {
       this.father.addItem(this);
@@ -31,21 +31,24 @@ public class Project extends Item {
   @Override
   protected Duration getDurationBetween(LocalDateTime ini, LocalDateTime end) {
     logger.trace("Method getDurationBetween");
-    assert(ini.isBefore(end));
-    assert(invariant());
+    assert (ini.isBefore(end));
+    assert (invariant());
     Duration duration = Duration.ZERO;
     for (int i = 0; i < item.size(); i++) {
       duration = duration.plus(item.get(i).getDurationBetween(ini, end));
     }
     logger.debug("Total duration between " + ini + " and " + end + " is " + duration);
-    assert(invariant());
-    assert(duration.compareTo(duration.ZERO) == 1 || duration.compareTo(duration.ZERO) == 0);
+    assert (invariant());
+    assert (duration.compareTo(duration.ZERO) > 0 || duration.equals(duration.ZERO));
     return duration;
   }
 
   public void addItem(Item it) {
+    assert (it != null);
+    assert (invariant());
     logger.trace("Method addItem");
     item.add(it);
+    assert (invariant());
   }
 
   @Override
@@ -68,20 +71,24 @@ public class Project extends Item {
 
   @Override
   public void acceptVisitor(Visitor v) {
+    assert (v != null);
+    assert (invariant());
     logger.trace("Method acceptVisitor");
     v.visitProject(this);
+    assert (invariant());
   }
 
   @Override
   public void setInitTime(LocalDateTime initTime) {
     logger.trace("Method setInitTime");
-    assert(invariant());
+    assert (initTime != null);
+    assert (invariant());
     this.initTime = initTime;
     if (father != null) {
       if (father.getInitTime() == null) {
         father.setInitTime(LocalDateTime.now());
       }
     }
-    assert(invariant());
+    assert (invariant());
   }
 }

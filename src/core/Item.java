@@ -1,11 +1,14 @@
 package core;
 
-import visitor.Visitor;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import visitor.Visitor;
+
+
+
 
 public abstract class Item {
   protected Project father;
@@ -14,12 +17,11 @@ public abstract class Item {
   protected LocalDateTime endTime;
   protected Duration totalTime;
   protected boolean active;
-  //TODO: Puede ser un arraylist o algo, o un array de strings esta bien???
-  protected String[] tag;
+  protected ArrayList<String> tag;
   private static Logger logger = LoggerFactory.getLogger("Milestone1.Item");
 
-  public Item(String name, Project father, String[] tag) {
-    assert(name.length() > 0);
+  public Item(String name, Project father, ArrayList<String> tag) {
+    assert (name.length() > 0);
     this.father = father;
     this.name = name;
     this.initTime = null;
@@ -27,24 +29,23 @@ public abstract class Item {
     this.totalTime = Duration.ZERO;
     this.active = false;
     this.tag = tag;
-    assert(this.name.equals(name));
   }
 
   public Item(String name, Project father) {
-    assert(name.length() > 0);
+    assert (name.length() > 0);
     this.father = father;
     this.name = name;
     this.initTime = null;
     this.endTime = null;
     this.totalTime = Duration.ZERO;
     this.active = false;
-    this.tag = new String[]{};
-    assert(this.name.equals(name));
+    this.tag = new ArrayList<>();
   }
 
   public Item(String name, Project father, LocalDateTime initTime,
-              LocalDateTime endTime, Duration totalTime, boolean active, String[] tag) {
-    assert(name.length() > 0);
+              LocalDateTime endTime, Duration totalTime, boolean active, ArrayList<String> tag) {
+    assert (name.length() > 0);
+    assert (totalTime != null);
     this.name = name;
     this.father = father;
     this.initTime = initTime;
@@ -52,7 +53,6 @@ public abstract class Item {
     this.totalTime = totalTime;
     this.active = active;
     this.tag = tag;
-    assert(this.name.equals(name));
   }
 
   protected abstract Duration getDurationBetween(LocalDateTime ini, LocalDateTime end);
@@ -87,11 +87,11 @@ public abstract class Item {
     this.name = name;
   }
 
-  public String[] getTag() {
+  public ArrayList<String> getTag() {
     return tag;
   }
 
-  public void setTag(String[] tag) {
+  public void setTag(ArrayList<String> tag) {
     this.tag = tag;
   }
 
@@ -119,32 +119,41 @@ public abstract class Item {
 
   public void updateEnd(LocalDateTime end) {
     logger.trace("Method updateEnd");
+    assert (end != null);
+    assert (invariant());
     this.endTime = end;
     logger.debug("EndTime is " + endTime);
     if (father != null) {
       father.updateEnd(end);
     }
+    assert (invariant());
   }
 
   public void updateIni(LocalDateTime ini) {
     logger.trace("Method updateIni");
+    assert (ini != null);
+    assert (invariant());
     this.initTime = ini;
     logger.debug("InitTime is " + initTime);
     if (father != null && father.getInitTime() == null) {
       father.updateIni(ini);
     }
+    assert (invariant());
   }
 
   public void updateTotalTime(Duration d) {
     logger.trace("Method updateTotalTime");
+    assert (d != null);
+    assert (invariant());
     totalTime = this.totalTime.plus(d);
     logger.debug("TotalTime is " + totalTime);
     if (father != null) {
       father.updateTotalTime(d);
     }
+    assert (invariant());
   }
 
-  protected boolean invariant(){
+  protected boolean invariant() {
     return initTime.isBefore(endTime) || initTime.isEqual(endTime);
   }
 }

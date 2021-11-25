@@ -1,12 +1,16 @@
 package visitor;
 
-import core.*;
+import core.File;
+import core.Interval;
+import core.Item;
+import core.Project;
+import core.Task;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import core.Item;
+
 
 public class Json implements Visitor {
   private Project root;
@@ -126,6 +130,7 @@ public class Json implements Visitor {
       e.printStackTrace();
     }
   }
+
   //Redireccionador a función que buscaria root para crear JSON completo
   @Override
   public void visitTask(Task t) {
@@ -135,6 +140,7 @@ public class Json implements Visitor {
 
   @Override
   public void visitInterval(Interval i) {}
+
   //Redireccionador a función que buscaria root para crear JSON completo
   @Override
   public void visitProject(Project p) {

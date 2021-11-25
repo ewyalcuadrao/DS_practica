@@ -1,12 +1,16 @@
 package visitor;
 
+import core.ClockTimer;
+import core.Interval;
+import core.Project;
+import core.Task;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Observable;
 import java.util.Observer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import core.*;
+
 
 public class Printer implements Visitor, Observer {
 
@@ -42,8 +46,8 @@ public class Printer implements Visitor, Observer {
       endTime = t.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
     logger.info("{} {} {} {} {}",
-        String.format("%-10s","Task: "),
-        String.format("%-20s",t.getName()),
+        String.format("%-10s", "Task: "),
+        String.format("%-20s", t.getName()),
         String.format("%-30s", initTime),
         String.format("%-30s", endTime),
         t.getTotalTime().toSeconds());
@@ -57,9 +61,11 @@ public class Printer implements Visitor, Observer {
   public void visitInterval(Interval i) {
     logger.trace("Method visitInterval");
     logger.info("{} {} {} {}",
-        String.format("%-31s","Interval: "),
-        String.format("%-30s", i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
-        String.format("%-30s", i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
+        String.format("%-31s", "Interval: "),
+        String.format("%-30s",
+            i.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
+        String.format("%-30s",
+            i.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))),
         i.getDuration().toSeconds());
   }
 
@@ -68,10 +74,10 @@ public class Printer implements Visitor, Observer {
     logger.trace("Method visitProject");
     String initTime = "null";
     String endTime = "null";
-    if (p.getFather() == null){
+    if (p.getFather() == null) {
       logger.info("{} {} {} {}",
-          String.format("%-31s",""),
-          String.format("%-30s","Initial time"),
+          String.format("%-31s", ""),
+          String.format("%-30s", "Initial time"),
           String.format("%-30s", "End time"),
           "Seconds");
     }
@@ -82,8 +88,8 @@ public class Printer implements Visitor, Observer {
       endTime = p.getEndTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
     logger.info("{} {} {} {} {}",
-        String.format("%-10s","Project: "),
-        String.format("%-20s",p.getName()),
+        String.format("%-10s", "Project: "),
+        String.format("%-20s", p.getName()),
         String.format("%-30s", initTime),
         String.format("%-30s", endTime),
         p.getTotalTime().toSeconds());
