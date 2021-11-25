@@ -12,7 +12,7 @@ public class ClockTimer extends Observable {
   private LocalDateTime dateTime;
   private static ClockTimer instance = null;
   private static final int periode = 2; //seconds
-  private static Logger logger = LoggerFactory.getLogger("Milestone1.ClockTimer");
+  private static final Logger logger = LoggerFactory.getLogger("Milestone1.ClockTimer");
 
   private ClockTimer() {
     this.start();

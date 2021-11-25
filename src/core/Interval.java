@@ -10,12 +10,12 @@ import visitor.Visitor;
 
 
 public class Interval implements Observer {
-  private ClockTimer clock;
+  private final ClockTimer clock;
   private LocalDateTime initTime;
   private Duration duration;
   private LocalDateTime endTime;
-  private Task father;
-  private static Logger logger = LoggerFactory.getLogger("Milestone1.Interval");
+  private final Task father;
+  private static final Logger logger = LoggerFactory.getLogger("Milestone1.Interval");
 
   public Interval(Task father) {
     this.father = father;

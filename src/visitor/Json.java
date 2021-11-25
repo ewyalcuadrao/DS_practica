@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 
 public class Json implements Visitor {
   private Project root;
-  private File file;
-  static Logger logger = LoggerFactory.getLogger("Milestone1.Visitor.Json");
+  private final File file;
+  private static final Logger logger = LoggerFactory.getLogger("Milestone1.Visitor.Json");
 
   public Json(Project root, String path) {
     this.root = root;

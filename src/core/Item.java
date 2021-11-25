@@ -18,7 +18,7 @@ public abstract class Item {
   protected Duration totalTime;
   protected boolean active;
   protected ArrayList<String> tag;
-  private static Logger logger = LoggerFactory.getLogger("Milestone1.Item");
+  private static final Logger logger = LoggerFactory.getLogger("Milestone1.Item");
 
   public Item(String name, Project father, ArrayList<String> tag) {
     assert (name.length() > 0);

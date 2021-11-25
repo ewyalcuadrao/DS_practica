@@ -10,7 +10,7 @@ import visitor.Visitor;
 
 public class Project extends Item {
   protected ArrayList<Item> item;
-  private static Logger logger = LoggerFactory.getLogger("Milestone1.Item.Project");
+  private static final Logger logger = LoggerFactory.getLogger("Milestone1.Item.Project");
 
   public Project(String name, Project father, ArrayList<String> tag) {
     super(name, father, tag);
@@ -39,7 +39,7 @@ public class Project extends Item {
     }
     logger.debug("Total duration between " + ini + " and " + end + " is " + duration);
     assert (invariant());
-    assert (duration.compareTo(duration.ZERO) > 0 || duration.equals(duration.ZERO));
+    assert (!duration.isNegative());
     return duration;
   }
 
@@ -66,7 +66,10 @@ public class Project extends Item {
   }
 
   public void setItem(ArrayList<Item> item) {
+    assert (item != null);
+    assert (invariant());
     this.item = item;
+    assert (invariant());
   }
 
   @Override

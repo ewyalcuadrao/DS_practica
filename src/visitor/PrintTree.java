@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 
 public class PrintTree implements Visitor {
-  private Project root;
-  static Logger logger = LoggerFactory.getLogger("Milestone1.Visitor.PrintTree");
+  private final Project root;
+  private static final Logger logger = LoggerFactory.getLogger("Milestone1.Visitor.PrintTree");
 
   public PrintTree(Project root) {
     this.root = root;

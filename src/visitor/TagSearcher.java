@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 
 
 public class TagSearcher implements Visitor {
-  private Project root;
-  private static Logger logger = LoggerFactory.getLogger("Milestone2.Visitor.TagSearcher");
+  private final Project root;
+  private static final Logger logger = LoggerFactory.getLogger("Milestone2.Visitor.TagSearcher");
 
   private String tag;
   protected ArrayList<Item> tagfound;

@@ -13,7 +13,7 @@ import visitor.Visitor;
 public class Task extends Item {
 
   private ArrayList<Interval> interval;
-  static Logger logger = LoggerFactory.getLogger("Milestone1.Item.Task");
+  private static final Logger logger = LoggerFactory.getLogger("Milestone1.Item.Task");
 
   public Task(String name, Project father) {
     super(name, father);

@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 public class Printer implements Visitor, Observer {
 
   private ClockTimer clock;
-  private Project root;
-  static Logger logger = LoggerFactory.getLogger("Milestone1.Visitor.Printer");
+  private final Project root;
+  private static final Logger logger = LoggerFactory.getLogger("Milestone1.Visitor.Printer");
 
   public Printer(Project root) {
     this.root = root;
