@@ -36,7 +36,7 @@ public class TagSearcher implements Visitor {
     logger.trace("Method visitTask");
     ArrayList tasktag = t.getTag();
     for (int j = 0; j < tasktag.size(); j++) {
-      if (tasktag.get(j).equals(this.tag)) {
+      if (tasktag.get(j).toLowerCase().equals(this.tag.toLowerCase())) {
         tagfound.add(t);
         logger.info(t.getName());
         j = tasktag.size();
@@ -54,7 +54,7 @@ public class TagSearcher implements Visitor {
     logger.trace("Method visitProject");
     ArrayList projecttag = p.getTag();
     for (int j = 0; j < projecttag.size(); j++) {
-      if (projecttag.get(j).equals(this.tag)) {
+      if (projecttag.get(j).toLowerCase().equals(this.tag.toLowerCase())) {
         tagfound.add(p);
         String name = p.getName();
         logger.info(name);
