@@ -27,10 +27,11 @@ public class Json implements Visitor {
     this.file = new File(path);
   }
 
+  //Método que incia la restauración de los datos en forma de arbol a partir de un proyecto raíz.
   public void saveRoot(Item i) {
     logger.trace("Method saveRoot");
     if (root == null) {
-      if (i.getFather() != null) { //comprovamos que el proyecto es root, sino llamamos al padre
+      if (i.getFather() != null) { //comprovamos que el proyecto es root, si no llamamos al padre
         saveRoot(i.getFather());
       } else {
         JSONArray jsonArray = new JSONArray();

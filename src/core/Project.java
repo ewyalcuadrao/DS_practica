@@ -43,6 +43,7 @@ public class Project extends Item {
     return duration;
   }
 
+
   public void addItem(Item it) {
     assert (it != null);
     assert (invariant());

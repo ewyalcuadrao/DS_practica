@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 
 public class Printer implements Visitor, Observer {
-
   private ClockTimer clock;
   private final Project root;
   private static final Logger logger = LoggerFactory.getLogger("Milestone1.Visitor.Printer");
@@ -38,7 +37,7 @@ public class Printer implements Visitor, Observer {
     String initTime = "null";
     String endTime = "null";
 
-    //Format de la data i l'hora: 'DD Mon YYYY hh:mm:ss'
+    //Format de la data i l'hora: 'DD Month YYYY hh:mm:ss'
     if (t.getInitTime() != null) {
       initTime = t.getInitTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }

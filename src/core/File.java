@@ -20,6 +20,7 @@ public class File {
     this.path = path;
   }
 
+  //Método con el que se inicia la restauración de los datos en forma de árbol a partir del archivo ".json".
   public Project readJson() {
     logger.trace("Method readJson");
     try {
@@ -42,6 +43,7 @@ public class File {
     }
   }
 
+  //Método que crea la lista de items de un proyecto a partir de un array de Json.
   private void recorrerJsonArrayItem(JSONArray arr, Project father) {
     logger.trace("Method recorrerJsonArrayItem");
     int i = 0;
@@ -63,6 +65,7 @@ public class File {
     }
   }
 
+  //Método que crea la lista de intervalos de una tarea a partir de un array de Json.
   private void recorrerJsonArrayInterval(JSONArray arr, Task father) {
     logger.trace("Method recorrerJsonArrayInterval");
     int i = 0;
@@ -77,6 +80,7 @@ public class File {
     }
   }
 
+  //Método que crea un proyecto a partir de un objeto Json.
   public void createProject(JSONObject json, Project father) {
     logger.trace("Method createProject");
     try {
@@ -100,6 +104,7 @@ public class File {
     }
   }
 
+  //Método que crea una tarea a partir de un objeto Json.
   public void createTask(JSONObject json, Project father) {
     logger.trace("Method createTask");
     try {
@@ -122,6 +127,7 @@ public class File {
     }
   }
 
+  //Método que crea un intervalo a partir de un objeto Json.
   public void createInterval(JSONObject json, Task father) {
     logger.trace("Method createInterval");
     try {
@@ -135,6 +141,7 @@ public class File {
     }
   }
 
+  //Método para almacenar datos en formato Json en el archivo correspondiente.
   public void writeJsonFile(JSONObject json) {
     logger.trace("Method writeJsonFile");
     try {
