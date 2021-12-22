@@ -38,7 +38,7 @@ public class Main {
       Project db = new Project("Databases", root, new ArrayList<String>(List.of("SQL", "python", "C++")));
       Task tt = new Task("Transportation", root);
       Project pp = new Project("Problems", sd);
-      Project ptr = new Project("core.Project Time Tracker", sd);
+      Project ptr = new Project("Project Time Tracker", sd);
       Task tfl = new Task("First list", pp, new ArrayList<String>(List.of("java")));
       Task tsl = new Task("Second list", pp, new ArrayList<String>(List.of("Dart")));
       Task rh = new Task("Read handout", ptr);

@@ -2,7 +2,9 @@ package core;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -122,30 +124,25 @@ public class Task extends Item {
 
   @Override
   public JSONObject toJson(int depth) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     JSONObject json = new JSONObject();
     JSONArray jsonArray = new JSONArray();
-    json.put("class", "core.Task");
+    json.put("id", this.id);
+    json.put("class", "task");
     json.put("name", this.name);
     json.put("father", this.father.getName());
-    if (this.initTime == null) {
-      json.put("init", "null");
-    } else {
-      json.put("init", this.initTime);
+    if (this.initTime != null) {
+      json.put("initialDate", formatter.format(this.initTime));
     }
-    if (this.endTime == null) {
-      json.put("end", "null");
-    } else {
-      json.put("end", this.endTime);
+    if (this.endTime != null) {
+      json.put("finalDate", formatter.format(this.endTime));
     }
-    json.put("totalTime", this.totalTime);
+    json.put("duration", this.totalTime.toSeconds());
     json.put("active", this.active);
-    if (depth > 0) {
-      for (int i = 0; i < this.interval.size(); i++) {
-        jsonArray.put(this.interval.get(i).toJson());
-      }
-      depth = depth - 1;
+    for (int i = 0; i < this.interval.size(); i++) {
+      jsonArray.put(this.interval.get(i).toJson());
     }
-    json.put("interval", jsonArray);
+    json.put("intervals", jsonArray);
     return json;
   }
 }

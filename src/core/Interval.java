@@ -2,6 +2,7 @@ package core;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -9,6 +10,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import visitor.Visitor;
+import java.time.temporal.ChronoUnit;
 
 
 public class Interval implements Observer {
@@ -17,23 +19,30 @@ public class Interval implements Observer {
   private Duration duration;
   private LocalDateTime endTime;
   private final Task father;
+  private final int id;
+  private boolean active;
 
   private static final Logger logger = LoggerFactory.getLogger("Milestone1.Interval");
 
   public Interval(Task father) {
+    this.id = Id.getInstance().getId();
     this.father = father;
     this.clock = ClockTimer.getInstance();
     this.duration = Duration.ZERO.plusSeconds(ClockTimer.getPeriode());
     this.clock.addObserver(this);
     this.initTime = LocalDateTime.now().minusSeconds(ClockTimer.getPeriode());
+    this.initTime= this.initTime.truncatedTo(ChronoUnit.SECONDS);
     this.updateIni(initTime);
     this.endTime = LocalDateTime.now();
+    this.endTime= this.endTime.truncatedTo(ChronoUnit.SECONDS);
     this.updateEnd(endTime);
+    this.active=true;
   }
 
   public void stopInterval() {
     logger.trace("Method stopInterval");
     clock.deleteObserver(this);
+    this.active = false;
   }
 
   public Duration getDuration() {
@@ -93,16 +102,19 @@ public class Interval implements Observer {
     this.duration = d;
   }
 
+  public boolean getActive() { return this.active; }
+
   public JSONObject toJson() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     JSONObject json = new JSONObject();
-      json.put("class", "core.Interval");
-      json.put("initTime", this.getInitTime());
-      json.put("endTime", this.getEndTime());
+    json.put("id", this.id);
+      json.put("class", "interval");
+      json.put("initialDate", formatter.format(this.getInitTime()));
+      json.put("finalDate", formatter.format(this.getEndTime()));
       json.put("father", this.getFather().getName());
-      json.put("duration", this.getDuration());
+      json.put("duration", this.getDuration().toSeconds());
+      json.put("active", this.getActive());
     return json;
-
-
 
   }
 }
