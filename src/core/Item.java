@@ -18,6 +18,7 @@ public abstract class Item {
   protected Duration totalTime;
   protected boolean active;
   protected ArrayList<String> tag;
+  int id;
   private static final Logger logger = LoggerFactory.getLogger("Milestone1.Item");
 
   public Item(String name, Project father, ArrayList<String> tag) {
@@ -156,4 +157,8 @@ public abstract class Item {
   protected boolean invariant() {
     return initTime.isBefore(endTime) || initTime.isEqual(endTime);
   }
+
+  public abstract Item findActivityById(int id);
+
+  public abstract JSONObject toJson(int depth);
 }

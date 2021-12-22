@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Observer;
+
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import visitor.Visitor;
@@ -90,4 +92,16 @@ public class Interval implements Observer {
     this.duration = d;
   }
 
+  public JSONObject toJson() {
+    JSONObject json = new JSONObject();
+      json.put("class", "core.Interval");
+      json.put("initTime", this.getInitTime());
+      json.put("endTime", this.getEndTime());
+      json.put("father", this.getFather().getName());
+      json.put("duration", this.getDuration());
+    return json;
+
+
+
+  }
 }
