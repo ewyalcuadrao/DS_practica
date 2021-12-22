@@ -3,6 +3,10 @@ package core;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import visitor.Visitor;
@@ -27,7 +31,7 @@ public class Task extends Item {
     this.father.addItem(this);
   }
 
-  protected void startWorking() {
+  public void startWorking() {
     logger.trace("Method startWorking " + this.name);
     if (!active) {
       Interval i = new Interval(this);
@@ -107,5 +111,41 @@ public class Task extends Item {
     assert (invariant());
     interval.add(i);
     assert (invariant());
+  }
+
+  @Override
+  public Item findActivityById(int id) {
+    if (this.id == id)
+      return this;
+    return null;
+  }
+
+  @Override
+  public JSONObject toJson(int depth) {
+    JSONObject json = new JSONObject();
+    JSONArray jsonArray = new JSONArray();
+    json.put("class", "core.Task");
+    json.put("name", this.name);
+    json.put("father", this.father.getName());
+    if (this.initTime == null) {
+      json.put("init", "null");
+    } else {
+      json.put("init", this.initTime);
+    }
+    if (this.endTime == null) {
+      json.put("end", "null");
+    } else {
+      json.put("end", this.endTime);
+    }
+    json.put("totalTime", this.totalTime);
+    json.put("active", this.active);
+    if (depth > 0) {
+      for (int i = 0; i < this.interval.size(); i++) {
+        jsonArray.put(this.interval.get(i).toJson());
+      }
+      depth = depth - 1;
+    }
+    json.put("interval", jsonArray);
+    return json;
   }
 }

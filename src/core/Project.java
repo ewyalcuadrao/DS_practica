@@ -3,6 +3,10 @@ package core;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import visitor.Visitor;
@@ -94,5 +98,51 @@ public class Project extends Item {
       }
     }
     assert (invariant());
+  }
+
+  @Override
+  public Item findActivityById(int id) {
+    if(this.id == id)
+      return this;
+    else {
+      for (int i = 0; i < item.size(); i++) {
+        Item resultat = item.get(i).findActivityById(id);
+        if (resultat != null)
+          return resultat;
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public JSONObject toJson(int depth) {
+    JSONObject json = new JSONObject();
+    JSONArray jsonArray = new JSONArray();
+    json.put("class", "core.Project");
+    json.put("name", this.name);
+    if (this.father == null) {
+      json.put("father", "null");
+    } else {
+      json.put("father", this.name);
+    }
+    if (this.initTime == null) {
+      json.put("init", "null");
+    } else {
+      json.put("init", this.initTime);
+    }
+    if (this.endTime == null) {
+      json.put("end", "null");
+    } else {
+      json.put("end", this.endTime);
+    }
+    json.put("totalTime", this.totalTime);
+    json.put("active", this.active);
+    if (depth > 0) {
+      for (int i = 0; i < this.item.size(); i++) {
+        jsonArray.put(this.item.get(i).toJson(depth - 1));
+      }
+    }
+    json.put("item", jsonArray);
+    return json;
   }
 }
