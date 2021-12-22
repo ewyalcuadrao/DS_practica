@@ -17,6 +17,7 @@ public class Interval implements Observer {
   private Duration duration;
   private LocalDateTime endTime;
   private final Task father;
+
   private static final Logger logger = LoggerFactory.getLogger("Milestone1.Interval");
 
   public Interval(Task father) {

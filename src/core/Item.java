@@ -30,6 +30,7 @@ public abstract class Item {
     this.totalTime = Duration.ZERO;
     this.active = false;
     this.tag = tag;
+    this.id = Id.getInstance().getId();
   }
 
   public Item(String name, Project father) {
@@ -41,6 +42,7 @@ public abstract class Item {
     this.totalTime = Duration.ZERO;
     this.active = false;
     this.tag = new ArrayList<>();
+    this.id = Id.getInstance().getId();
   }
 
   public Item(String name, Project father, LocalDateTime initTime,
@@ -54,6 +56,7 @@ public abstract class Item {
     this.totalTime = totalTime;
     this.active = active;
     this.tag = tag;
+    this.id = Id.getInstance().getId();
   }
 
   protected abstract Duration getDurationBetween(LocalDateTime ini, LocalDateTime end);
@@ -80,6 +83,7 @@ public abstract class Item {
     return active;
   }
 
+
   public void setFather(Project father) {
     this.father = father;
   }
@@ -96,6 +100,7 @@ public abstract class Item {
     this.tag = tag;
   }
 
+  public int getId(){return id;}
   public void setInitTime(LocalDateTime initTime) {
     this.initTime = initTime;
   }
