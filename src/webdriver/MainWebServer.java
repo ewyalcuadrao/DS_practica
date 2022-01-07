@@ -22,6 +22,7 @@ public class MainWebServer {
     ClockTimer.getInstance().start();
 
     new WebServer((Project) root);
+    
   }
 
   public static Item makeTreeCourses() {
