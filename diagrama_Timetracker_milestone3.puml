@@ -21,6 +21,7 @@ abstract Item{
 + updateIni(ini : LocalDateTime)
 + updateTotalTime(d : Duration)
 + {abstract} acceptVisitor(v : Visitor)
++ {abstract} toJson(depth : int) : JSONObject
 }
 
 
@@ -32,6 +33,7 @@ class Project{
 + addTask(task : Task)
 + getTotalTime() : Duration
 + acceptVisitor(v : Visitor)
++ toJson(depth : int) : JSONObject
 }
 
 class Task{
@@ -43,6 +45,7 @@ class Task{
 + acceptVisitor(v : Visitor)
 + addInterval(i : Interval)
 + getLastInterval() : Interval
++ toJson(depth : int) : JSONObject
 }
 
 class Interval{
@@ -57,6 +60,7 @@ class Interval{
 + acceptVisitor(v : Visitor)
 + updateEnd(end : LocalDateTime)
 + updateIni(ini : LocalDateTime)
++ toJson(depth : int) : JSONObject
 }
 
 class ClockTimer{
